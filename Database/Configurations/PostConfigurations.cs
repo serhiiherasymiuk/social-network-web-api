@@ -17,8 +17,8 @@ namespace Database.Configurations
             builder
                 .HasOne(p => p.User)
                 .WithMany(u => u.Posts)
-                .HasForeignKey(p => p.UserId);
-
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Database
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new PostConfigurations());
+            modelBuilder.ApplyConfiguration(new CommentConfigurations());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -25,5 +26,6 @@ namespace Database
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }
