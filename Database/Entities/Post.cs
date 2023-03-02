@@ -14,5 +14,6 @@ namespace Database.Entities
         public int UserId { get; set; }
         public User User { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public ICollection<Like> Likes { get; set; }
     }
 }
