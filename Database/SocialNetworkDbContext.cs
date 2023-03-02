@@ -20,6 +20,7 @@ namespace Database
             modelBuilder.ApplyConfiguration(new CommentConfigurations());
             modelBuilder.ApplyConfiguration(new LikeConfigurations());
             modelBuilder.ApplyConfiguration(new FollowConfigurations());
+            modelBuilder.ApplyConfiguration(new MessageConfigurations());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -31,5 +32,6 @@ namespace Database
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Like> Likes { get; set; }
         public DbSet<Follow> Follows { get; set; }
+        public DbSet<Message> Messages { get; set; }
     }
 }
