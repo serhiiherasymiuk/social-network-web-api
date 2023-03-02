@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Database.Entities;
 
 namespace Database
 {
