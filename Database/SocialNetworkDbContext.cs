@@ -21,6 +21,7 @@ namespace Database
             modelBuilder.ApplyConfiguration(new LikeConfigurations());
             modelBuilder.ApplyConfiguration(new FollowConfigurations());
             modelBuilder.ApplyConfiguration(new MessageConfigurations());
+            modelBuilder.ApplyConfiguration(new NotificationConfigurations());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -33,5 +34,6 @@ namespace Database
         public DbSet<Like> Likes { get; set; }
         public DbSet<Follow> Follows { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
     }
 }

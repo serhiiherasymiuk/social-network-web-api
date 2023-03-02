@@ -20,6 +20,7 @@ namespace Database.Entities
         public ICollection<Follow> FollowedUsers { get; set; }
         public ICollection<Message> SentMessages { get; set; }
         public ICollection<Message> ReceivedMessages { get; set; }
+        public ICollection<Notification> Notifications { get; set; }
     }
 
 }
