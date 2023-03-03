@@ -22,5 +22,4 @@ namespace Database.Entities
         public ICollection<Message> ReceivedMessages { get; set; }
         public ICollection<Notification> Notifications { get; set; }
     }
-
 }
