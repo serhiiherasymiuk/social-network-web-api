@@ -36,5 +36,12 @@ namespace WebAPI.Controllers
             await usersService.Create(user);
             return Ok();
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Edit([FromBody] User user)
+        {
+            await usersService.Edit(user);
+            return Ok();
+        }
     }
 }
