@@ -29,5 +29,12 @@ namespace WebAPI.Controllers
             if (item == null) return NotFound();
             return Ok(item);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] User user)
+        {
+            await usersService.Create(user);
+            return Ok();
+        }
     }
 }
