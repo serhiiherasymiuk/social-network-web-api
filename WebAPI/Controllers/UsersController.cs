@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Interfaces;
+using Database.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,6 +14,12 @@ namespace WebAPI.Controllers
         public UsersController(IUsersService usersService)
         {
             this.usersService = usersService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await usersService.GetAll());
         }
     }
 }
