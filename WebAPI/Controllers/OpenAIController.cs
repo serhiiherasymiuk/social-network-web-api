@@ -14,5 +14,11 @@ namespace WebAPI.Controllers
         {
             this.openAIService = openAIService;
         }
+        [HttpPost("generate-response")]
+        public async Task<IActionResult> GenerateResponse([FromBody] string question)
+        {
+            var response = await openAIService.GenerateResponse(question);
+            return Ok(response);
+        }
     }
 }
