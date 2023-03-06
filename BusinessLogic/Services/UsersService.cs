@@ -1,7 +1,6 @@
 ﻿using BusinessLogic.Interfaces;
 using Database.Interfaces;
 using Database.Entities;
-using Database.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +24,7 @@ namespace BusinessLogic.Services
 
         public async Task<User?> GetById(int id)
         {
-            if (await usersRepo.GetByID(id) == null) return null; // throw exception
+            if (await usersRepo.GetByID(id) == null) return null;
 
             return await usersRepo.GetByID(id);
         }
@@ -44,7 +43,7 @@ namespace BusinessLogic.Services
 
         public async Task Delete(int id)
         {
-            if (await usersRepo.GetByID(id) == null) return; // throw exception
+            if (await usersRepo.GetByID(id) == null) return;
 
             await usersRepo.Delete(id);
             await usersRepo.Save();
