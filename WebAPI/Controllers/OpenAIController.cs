@@ -1,6 +1,4 @@
-﻿using BusinessLogic.Interfaces;
-using BusinessLogic.Services;
-using Microsoft.AspNetCore.Http;
+﻿using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers

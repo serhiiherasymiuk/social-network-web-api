@@ -1,13 +1,6 @@
-﻿using BusinessLogic.Interfaces;
-using Database.Entities;
-using Database.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Interfaces;
 
-namespace BusinessLogic.Services
+namespace Core.Services
 {
     public class OpenAIService : IOpenAIService
     {

@@ -1,14 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Database.Entities;
-using System.Reflection.Emit;
+using Core.Entities;
 
-namespace Database.Configurations
+namespace Infrastructure.Configurations
 {
     public class PostConfigurations : IEntityTypeConfiguration<Post>
     {

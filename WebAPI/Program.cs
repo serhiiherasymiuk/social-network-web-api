@@ -1,7 +1,6 @@
-using BusinessLogic.Interfaces;
-using BusinessLogic.Services;
-using Database;
-using Database.Interfaces;
+using Core.Interfaces;
+using Core.Services;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

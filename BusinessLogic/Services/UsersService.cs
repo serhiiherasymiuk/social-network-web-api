@@ -1,13 +1,7 @@
-﻿using BusinessLogic.Interfaces;
-using Database.Interfaces;
-using Database.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Interfaces;
+using Core.Entities;
 
-namespace BusinessLogic.Services
+namespace Core.Services
 {
     public class UsersService : IUsersService
     {
