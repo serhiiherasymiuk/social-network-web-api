@@ -1,11 +1,8 @@
-﻿using Database.Entities;
-using Database.Configurations;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Core.Entities;
+using Infrastructure.Configurations;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using System.Reflection.Emit;
 
-namespace Database
+namespace Infrastructure
 {
     public class SocialNetworkDbContext : DbContext
     {
