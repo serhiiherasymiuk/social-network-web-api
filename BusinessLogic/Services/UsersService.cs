@@ -1,13 +1,8 @@
-﻿using BusinessLogic.Interfaces;
-using Database.Interfaces;
-using Database.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Core.Interfaces;
+using Core.Entities;
+using Core.Specifications;
 
-namespace BusinessLogic.Services
+namespace Core.Services
 {
     public class UsersService : IUsersService
     {
@@ -19,14 +14,12 @@ namespace BusinessLogic.Services
         }
         public async Task<IEnumerable<User>> GetAll()
         {
-            return await usersRepo.Get();
+            return await usersRepo.GetAllBySpec(new Users.OrderedAll());
         }
 
         public async Task<User?> GetById(int id)
         {
-            if (await usersRepo.GetByID(id) == null) return null;
-
-            return await usersRepo.GetByID(id);
+            return await usersRepo.GetBySpec(new Users.ById(id));
         }
 
         public async Task Edit(User movie)
@@ -44,7 +37,6 @@ namespace BusinessLogic.Services
         public async Task Delete(int id)
         {
             if (await usersRepo.GetByID(id) == null) return;
-
             await usersRepo.Delete(id);
             await usersRepo.Save();
         }

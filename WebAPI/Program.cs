@@ -1,4 +1,6 @@
-using Database;
+using Core.Interfaces;
+using Core.Services;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<SocialNetworkDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("LocalDb")));
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IOpenAIService, OpenAIService>();
 
 var app = builder.Build();
 
