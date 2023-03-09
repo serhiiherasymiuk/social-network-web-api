@@ -20,31 +20,9 @@ namespace Infrastructure
             await context.SaveChangesAsync();
         }
 
-        public async virtual Task<IEnumerable<TEntity>> Get(
-            Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            params string[] includeProperties)
+        public async virtual Task<IEnumerable<TEntity>> GetAll()
         {
-            IQueryable<TEntity> query = dbSet;
-
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-
-            foreach (var includeProperty in includeProperties)
-            {
-                query = query.Include(includeProperty);
-            }
-
-            if (orderBy != null)
-            {
-                return await orderBy(query).ToListAsync();
-            }
-            else
-            {
-                return await query.ToListAsync();
-            }
+            return await dbSet.ToListAsync();
         }
 
         public async virtual Task<TEntity?> GetByID(object id)

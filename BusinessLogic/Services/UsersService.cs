@@ -13,7 +13,7 @@ namespace Core.Services
         }
         public async Task<IEnumerable<User>> GetAll()
         {
-            return await usersRepo.Get();
+            return await usersRepo.GetAll();
         }
 
         public async Task<User?> GetById(int id)
