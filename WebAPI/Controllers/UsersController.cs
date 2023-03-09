@@ -20,5 +20,12 @@ namespace WebAPI.Controllers
         {
             return Ok(await usersService.GetAll());
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get([FromRoute] int id)
+        {
+            var item = await usersService.GetById(id);
+            if (item == null) return NotFound();
+            return Ok(item);
+        }
     }
 }
