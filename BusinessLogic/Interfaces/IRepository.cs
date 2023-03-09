@@ -10,6 +10,7 @@ namespace Core.Interfaces
         Task<TEntity?> GetByID(object id);
 
         Task<TEntity?> GetBySpec(ISpecification<TEntity> specification);
+        Task<IEnumerable<TEntity>> GetAllBySpec(ISpecification<TEntity> specification);
 
         Task Insert(TEntity entity);
 

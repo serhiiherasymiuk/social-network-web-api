@@ -37,6 +37,11 @@ namespace Infrastructure
             return await ApplySpecification(specification).FirstOrDefaultAsync();
         }
 
+        public async Task<IEnumerable<TEntity>> GetAllBySpec(ISpecification<TEntity> specification)
+        {
+            return await ApplySpecification(specification).ToListAsync();
+        }
+
         private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
         {
             var evaculator = new SpecificationEvaluator();
@@ -52,7 +57,7 @@ namespace Infrastructure
         {
             TEntity? entityToDelete = await dbSet.FindAsync(id);
             if (entityToDelete != null)
-                Delete(entityToDelete);
+                await Delete(entityToDelete);
         }
 
         public virtual Task Delete(TEntity entityToDelete)

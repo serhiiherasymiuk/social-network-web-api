@@ -14,7 +14,7 @@ namespace Core.Services
         }
         public async Task<IEnumerable<User>> GetAll()
         {
-            return await usersRepo.GetAll();
+            return await usersRepo.GetAllBySpec(new Users.OrderedAll());
         }
 
         public async Task<User?> GetById(int id)
@@ -37,7 +37,6 @@ namespace Core.Services
         public async Task Delete(int id)
         {
             if (await usersRepo.GetByID(id) == null) return;
-
             await usersRepo.Delete(id);
             await usersRepo.Save();
         }
