@@ -21,5 +21,13 @@ namespace WebAPI.Controllers
         {
             return Ok(await postsService.GetAll());
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get([FromRoute] int id)
+        {
+            var item = await postsService.GetById(id);
+            if (item == null) return NotFound();
+            return Ok(item);
+        }
     }
 }
