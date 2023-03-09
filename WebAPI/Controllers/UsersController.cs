@@ -33,5 +33,18 @@ namespace WebAPI.Controllers
             await usersService.Create(user);
             return Ok();
         }
+        [HttpPut]
+        public async Task<IActionResult> Edit([FromBody] User user)
+        {
+            await usersService.Edit(user);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            await usersService.Delete(id);
+            return Ok();
+        }
     }
 }

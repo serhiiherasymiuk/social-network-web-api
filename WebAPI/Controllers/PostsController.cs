@@ -21,40 +21,5 @@ namespace WebAPI.Controllers
         {
             return Ok(await postsService.GetAll());
         }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute] int id)
-        {
-            var item = await postsService.GetById(id);
-            if (item == null) return NotFound();
-            return Ok(item);
-        }
-        [HttpGet("byUserId/{userId}")]
-        public async Task<IActionResult> GetByUserId([FromRoute] int userId)
-        {
-            var item = await postsService.GetByUserId(userId);
-            if (item == null) return NotFound();
-            return Ok(item);
-        }
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Post post)
-        {
-            await postsService.Create(post);
-            return Ok();
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> Edit([FromBody] Post post)
-        {
-            await postsService.Edit(post);
-            return Ok();
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
-        {
-            await postsService.Delete(id);
-            return Ok();
-        }
     }
 }
