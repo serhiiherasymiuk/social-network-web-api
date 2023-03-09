@@ -8,9 +8,9 @@ namespace Core.Services
     {
         private readonly IRepository<User> usersRepo;
 
-        public UsersService(IRepository<User> genresRepo)
+        public UsersService(IRepository<User> usersRepo)
         {
-            this.usersRepo = genresRepo;
+            this.usersRepo = usersRepo;
         }
         public async Task<IEnumerable<User>> GetAll()
         {
@@ -22,15 +22,15 @@ namespace Core.Services
             return await usersRepo.GetBySpec(new Users.ById(id));
         }
 
-        public async Task Edit(User movie)
+        public async Task Edit(User post)
         {
-            await usersRepo.Update(movie);
+            await usersRepo.Update(post);
             await usersRepo.Save();
         }
 
-        public async Task Create(User movie)
+        public async Task Create(User post)
         {
-            await usersRepo.Insert(movie);
+            await usersRepo.Insert(post);
             await usersRepo.Save();
         }
 
