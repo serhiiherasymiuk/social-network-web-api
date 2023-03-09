@@ -1,15 +1,16 @@
-﻿using System.Linq.Expressions;
+﻿using Ardalis.Specification;
+using System.Linq.Expressions;
 
 namespace Core.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        Task<IEnumerable<TEntity>> Get(
-            Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            params string[] includeProperties);
+        Task<IEnumerable<TEntity>> GetAll();
 
         Task<TEntity?> GetByID(object id);
+
+        Task<TEntity?> GetBySpec(ISpecification<TEntity> specification);
+        Task<IEnumerable<TEntity>> GetAllBySpec(ISpecification<TEntity> specification);
 
         Task Insert(TEntity entity);
 
