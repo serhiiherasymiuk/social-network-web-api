@@ -42,5 +42,11 @@ namespace WebAPI.Controllers
             await postsService.Create(post);
             return Ok();
         }
+        [HttpPut]
+        public async Task<IActionResult> Edit([FromBody] Post post)
+        {
+            await postsService.Edit(post);
+            return Ok();
+        }
     }
 }
