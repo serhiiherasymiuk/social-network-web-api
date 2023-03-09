@@ -36,7 +36,7 @@ namespace Core.Services
 
         public async Task Delete(int id)
         {
-            if (await usersRepo.GetByID(id) == null) return;
+            if (await usersRepo.GetById(id) == null) return;
             await usersRepo.Delete(id);
             await usersRepo.Save();
         }
