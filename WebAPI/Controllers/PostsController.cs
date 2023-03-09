@@ -36,5 +36,11 @@ namespace WebAPI.Controllers
             if (item == null) return NotFound();
             return Ok(item);
         }
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] Post post)
+        {
+            await postsService.Create(post);
+            return Ok();
+        }
     }
 }
