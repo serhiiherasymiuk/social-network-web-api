@@ -9,6 +9,8 @@ namespace Core.Interfaces
 
         Task<TEntity?> GetByID(object id);
 
+        Task<TEntity?> GetBySpec(ISpecification<TEntity> specification);
+
         Task Insert(TEntity entity);
 
         Task Delete(object id);

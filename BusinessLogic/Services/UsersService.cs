@@ -1,5 +1,6 @@
 ﻿using Core.Interfaces;
 using Core.Entities;
+using Core.Specifications;
 
 namespace Core.Services
 {
@@ -18,9 +19,7 @@ namespace Core.Services
 
         public async Task<User?> GetById(int id)
         {
-            if (await usersRepo.GetByID(id) == null) return null;
-
-            return await usersRepo.GetByID(id);
+            return await usersRepo.GetBySpec(new Users.ById(id));
         }
 
         public async Task Edit(User movie)
