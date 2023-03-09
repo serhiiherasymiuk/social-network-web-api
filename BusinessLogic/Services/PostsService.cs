@@ -14,16 +14,15 @@ namespace Core.Services
         }
         public async Task<IEnumerable<Post>> GetAll()
         {
-            return await postsRepo.GetAll();
+            return await postsRepo.GetAllBySpec(new Posts.OrderedByLikes());
         }
-
         public async Task<Post?> GetById(int id)
         {
-            return await postsRepo.GetById(id);
+            return await postsRepo.GetBySpec(new Posts.ById(id));
         }
         public async Task<IEnumerable<Post>> GetByUserId(int userId)
         {
-            return await postsRepo.GetAll();
+            return await postsRepo.GetAllBySpec(new Posts.ByUserId(userId));
         }
         public async Task Edit(Post post)
         {
@@ -39,7 +38,7 @@ namespace Core.Services
 
         public async Task Delete(int id)
         {
-            if (await postsRepo.GetById(id) == null) return;
+            if (await postsRepo.GetByID(id) == null) return;
             await postsRepo.Delete(id);
             await postsRepo.Save();
         }

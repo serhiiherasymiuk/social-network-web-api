@@ -1,4 +1,6 @@
-﻿using Core.Interfaces;
+﻿using Ardalis.Specification;
+using Ardalis.Specification.EntityFrameworkCore;
+using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -20,36 +22,30 @@ namespace Infrastructure
             await context.SaveChangesAsync();
         }
 
-        public async virtual Task<IEnumerable<TEntity>> Get(
-            Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-            params string[] includeProperties)
+        public async virtual Task<IEnumerable<TEntity>> GetAll()
         {
-            IQueryable<TEntity> query = dbSet;
-
-            if (filter != null)
-            {
-                query = query.Where(filter);
-            }
-
-            foreach (var includeProperty in includeProperties)
-            {
-                query = query.Include(includeProperty);
-            }
-
-            if (orderBy != null)
-            {
-                return await orderBy(query).ToListAsync();
-            }
-            else
-            {
-                return await query.ToListAsync();
-            }
+            return await dbSet.ToListAsync();
         }
 
-        public async virtual Task<TEntity?> GetById(object id)
+        public async virtual Task<TEntity?> GetByID(object id)
         {
             return await dbSet.FindAsync(id);
+        }
+
+        public async Task<TEntity?> GetBySpec(ISpecification<TEntity> specification)
+        {
+            return await ApplySpecification(specification).FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAllBySpec(ISpecification<TEntity> specification)
+        {
+            return await ApplySpecification(specification).ToListAsync();
+        }
+
+        private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
+        {
+            var evaculator = new SpecificationEvaluator();
+            return evaculator.GetQuery(dbSet, specification);
         }
 
         public async virtual Task Insert(TEntity entity)
@@ -61,7 +57,7 @@ namespace Infrastructure
         {
             TEntity? entityToDelete = await dbSet.FindAsync(id);
             if (entityToDelete != null)
-                Delete(entityToDelete);
+                await Delete(entityToDelete);
         }
 
         public virtual Task Delete(TEntity entityToDelete)
