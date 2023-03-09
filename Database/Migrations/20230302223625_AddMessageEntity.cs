@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Database.Migrations
+namespace Infrastructure.Migrations
 {
     public partial class AddMessageEntity : Migration
     {

@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Database.Entities;
-
-namespace Database
+﻿namespace Infrastructure
 {
     public static class DbContextExtensions
     {

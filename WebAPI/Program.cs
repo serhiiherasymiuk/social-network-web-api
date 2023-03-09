@@ -1,7 +1,6 @@
-using BusinessLogic.Interfaces;
-using BusinessLogic.Services;
-using Database;
-using Database.Interfaces;
+using Core.Interfaces;
+using Core.Services;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +16,7 @@ builder.Services.AddDbContext<SocialNetworkDbContext>(opt => opt.UseSqlServer(bu
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IOpenAIService, OpenAIService>();
 
 var app = builder.Build();
 
