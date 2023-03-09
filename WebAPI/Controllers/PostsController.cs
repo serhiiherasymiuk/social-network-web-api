@@ -48,5 +48,11 @@ namespace WebAPI.Controllers
             await postsService.Edit(post);
             return Ok();
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            await postsService.Delete(id);
+            return Ok();
+        }
     }
 }
