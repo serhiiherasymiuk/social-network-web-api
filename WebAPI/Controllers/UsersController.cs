@@ -20,7 +20,6 @@ namespace WebAPI.Controllers
         {
             return Ok(await usersService.GetAll());
         }
-
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
@@ -28,14 +27,12 @@ namespace WebAPI.Controllers
             if (item == null) return NotFound();
             return Ok(item);
         }
-
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] User user)
         {
             await usersService.Create(user);
             return Ok();
         }
-
         [HttpPut]
         public async Task<IActionResult> Edit([FromBody] User user)
         {

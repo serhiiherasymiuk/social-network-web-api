@@ -17,6 +17,7 @@ builder.Services.AddDbContext<SocialNetworkDbContext>(opt => opt.UseSqlServer(bu
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IOpenAIService, OpenAIService>();
+builder.Services.AddScoped<IPostsService, PostsService>();
 
 var app = builder.Build();
 
