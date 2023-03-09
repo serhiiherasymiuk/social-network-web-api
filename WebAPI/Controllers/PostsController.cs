@@ -29,5 +29,12 @@ namespace WebAPI.Controllers
             if (item == null) return NotFound();
             return Ok(item);
         }
+        [HttpGet("byUserId/{userId}")]
+        public async Task<IActionResult> GetByUserId([FromRoute] int userId)
+        {
+            var item = await postsService.GetByUserId(userId);
+            if (item == null) return NotFound();
+            return Ok(item);
+        }
     }
 }
