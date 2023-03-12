@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using Core.DTOs.Posts;
+using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -37,15 +38,15 @@ namespace WebAPI.Controllers
             return Ok(item);
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Post post)
+        public async Task<IActionResult> Create([FromBody] PostDTO createPostDTO)
         {
-            await postsService.Create(post);
+            await postsService.Create(createPostDTO);
             return Ok();
         }
         [HttpPut]
-        public async Task<IActionResult> Edit([FromBody] Post post)
+        public async Task<IActionResult> Edit([FromBody] PostDTO createPostDTO)
         {
-            await postsService.Edit(post);
+            await postsService.Edit(createPostDTO);
             return Ok();
         }
         [HttpDelete("{id}")]
