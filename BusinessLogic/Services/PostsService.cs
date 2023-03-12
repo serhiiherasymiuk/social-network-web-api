@@ -1,38 +1,45 @@
 ﻿using Core.Interfaces;
 using Core.Entities;
 using Core.Specifications;
+using Core.DTOs;
+using AutoMapper;
 
 namespace Core.Services
 {
     public class PostsService : IPostsService
     {
         private readonly IRepository<Post> postsRepo;
+        private readonly IMapper mapper;
 
-        public PostsService(IRepository<Post> postsRepo)
+        public PostsService(IRepository<Post> postsRepo, IMapper mapper)
         {
             this.postsRepo = postsRepo;
+            this.mapper = mapper;
         }
-        public async Task<IEnumerable<Post>> GetAll()
+        public async Task<IEnumerable<PostDTO>> GetAll()
         {
-            return await postsRepo.GetAllBySpec(new Posts.OrderedByLikes());
+            var posts = await postsRepo.GetAllBySpec(new Posts.OrderedByLikes());
+            return mapper.Map<IEnumerable<PostDTO>>(posts);
         }
-        public async Task<Post?> GetById(int id)
+        public async Task<PostDTO?> GetById(int id)
         {
-            return await postsRepo.GetBySpec(new Posts.ById(id));
+            Post post = await postsRepo.GetBySpec(new Posts.ById(id));
+            return mapper.Map<PostDTO>(post);
         }
-        public async Task<IEnumerable<Post>> GetByUserId(int userId)
+        public async Task<IEnumerable<PostDTO>> GetByUserId(int userId)
         {
-            return await postsRepo.GetAllBySpec(new Posts.ByUserId(userId));
+            var posts = await postsRepo.GetAllBySpec(new Posts.ByUserId(userId));
+            return mapper.Map<IEnumerable<PostDTO>>(posts);
         }
-        public async Task Edit(Post post)
+        public async Task Edit(PostDTO post)
         {
-            await postsRepo.Update(post);
+            await postsRepo.Update(mapper.Map<Post>(post));
             await postsRepo.Save();
         }
 
-        public async Task Create(Post post)
+        public async Task Create(PostDTO post)
         {
-            await postsRepo.Insert(post);
+            await postsRepo.Insert(mapper.Map<Post>(post));
             await postsRepo.Save();
         }
 
