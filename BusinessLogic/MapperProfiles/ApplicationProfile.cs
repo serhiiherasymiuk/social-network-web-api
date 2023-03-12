@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Core.DTOs.Posts;
+using Core.DTOs;
 using Core.Entities;
 
 namespace Core.MapperProfiles
@@ -9,6 +9,8 @@ namespace Core.MapperProfiles
         public ApplicationProfile()
         {
             CreateMap<Post, PostDTO>().ReverseMap();
+
+            CreateMap<User, UserDTO>().ReverseMap();
         }
     }
 }

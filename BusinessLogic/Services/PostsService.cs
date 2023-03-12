@@ -1,7 +1,7 @@
 ﻿using Core.Interfaces;
 using Core.Entities;
 using Core.Specifications;
-using Core.DTOs.Posts;
+using Core.DTOs;
 using AutoMapper;
 
 namespace Core.Services

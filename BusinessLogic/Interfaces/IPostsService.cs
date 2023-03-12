@@ -1,4 +1,4 @@
-﻿using Core.DTOs.Posts;
+﻿using Core.DTOs;
 using Core.Entities;
 using System;
 using System.Collections.Generic;

@@ -1,36 +1,41 @@
 ﻿using Core.Interfaces;
 using Core.Entities;
 using Core.Specifications;
+using Core.DTOs;
+using AutoMapper;
 
 namespace Core.Services
 {
     public class UsersService : IUsersService
     {
         private readonly IRepository<User> usersRepo;
-
-        public UsersService(IRepository<User> usersRepo)
+        private readonly IMapper mapper;
+        public UsersService(IRepository<User> usersRepo, IMapper mapper)
         {
             this.usersRepo = usersRepo;
+            this.mapper = mapper;
         }
-        public async Task<IEnumerable<User>> GetAll()
+        public async Task<IEnumerable<UserDTO>> GetAll()
         {
-            return await usersRepo.GetAllBySpec(new Users.OrderedAll());
-        }
-
-        public async Task<User?> GetById(int id)
-        {
-            return await usersRepo.GetBySpec(new Users.ById(id));
+            var users = await usersRepo.GetAllBySpec(new Users.OrderedAll());
+            return mapper.Map<IEnumerable<UserDTO>>(users);
         }
 
-        public async Task Edit(User post)
+        public async Task<UserDTO?> GetById(int id)
         {
-            await usersRepo.Update(post);
+            User user = await usersRepo.GetBySpec(new Users.ById(id));
+            return mapper.Map<UserDTO>(user);
+        }
+
+        public async Task Edit(UserDTO userDTO)
+        {
+            await usersRepo.Update(mapper.Map<User>(userDTO));
             await usersRepo.Save();
         }
 
-        public async Task Create(User post)
+        public async Task Create(UserDTO userDTO)
         {
-            await usersRepo.Insert(post);
+            await usersRepo.Insert(mapper.Map<User>(userDTO));
             await usersRepo.Save();
         }
 
