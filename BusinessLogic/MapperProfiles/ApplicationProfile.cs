@@ -8,7 +8,8 @@ namespace Core.MapperProfiles
     {
         public ApplicationProfile()
         {
-            CreateMap<Post, PostDTO>().ReverseMap();
+            CreateMap<Post, PostDTO>().ReverseMap()
+                .ForMember(dest => dest.DateCreated, opt => opt.MapFrom(src => DateTime.Now));
 
             CreateMap<User, UserDTO>().ReverseMap();
         }
