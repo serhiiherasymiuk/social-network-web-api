@@ -19,6 +19,8 @@ namespace Core.MapperProfiles
             CreateMap<Like, LikeDTO>().ReverseMap();
 
             CreateMap<Message, MessageDTO>().ReverseMap();
+
+            CreateMap<Follow, FollowDTO>().ReverseMap();
         }
     }
 }
