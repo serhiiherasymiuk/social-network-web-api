@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Database.Entities
+﻿namespace Core.Entities
 {
     public class User
     {
@@ -22,5 +16,4 @@ namespace Database.Entities
         public ICollection<Message> ReceivedMessages { get; set; }
         public ICollection<Notification> Notifications { get; set; }
     }
-
 }

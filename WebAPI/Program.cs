@@ -1,5 +1,8 @@
-using Database;
+using Core.Interfaces;
+using Core.Services;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,13 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<SocialNetworkDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("LocalDb")));
 
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IOpenAIService, OpenAIService>();
+builder.Services.AddScoped<IPostsService, PostsService>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,6 +32,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseAuthorization();
 
