@@ -18,7 +18,8 @@ namespace Core.MapperProfiles
 
             CreateMap<Like, LikeDTO>().ReverseMap();
 
-            CreateMap<Message, MessageDTO>().ReverseMap();
+            CreateMap<Message, MessageDTO>().ReverseMap()
+                .ForMember(dest => dest.DateSent, opt => opt.MapFrom(src => DateTime.Now));
 
             CreateMap<Follow, FollowDTO>().ReverseMap();
         }
