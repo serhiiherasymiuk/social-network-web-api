@@ -3,6 +3,8 @@ using Core.Entities;
 using Core.Specifications;
 using Core.DTOs;
 using AutoMapper;
+using Core.Helpers;
+using System.Net;
 
 namespace Core.Services
 {
@@ -24,6 +26,8 @@ namespace Core.Services
         public async Task<UserDTO?> GetById(int id)
         {
             User user = await usersRepo.GetBySpec(new Users.ById(id));
+            if (user == null)
+                throw new HttpException($"User with Id of {id} not found!", HttpStatusCode.NotFound);
             return mapper.Map<UserDTO>(user);
         }
 
@@ -41,7 +45,8 @@ namespace Core.Services
 
         public async Task Delete(int id)
         {
-            if (await usersRepo.GetByID(id) == null) return;
+            if (await usersRepo.GetByID(id) == null)
+                throw new HttpException($"User with Id of {id} not found!", HttpStatusCode.NotFound);
             await usersRepo.Delete(id);
             await usersRepo.Save();
         }
