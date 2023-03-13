@@ -1,6 +1,7 @@
 ﻿using Core.Interfaces;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Core.DTOs;
 
 namespace WebAPI.Controllers
 {
@@ -20,7 +21,6 @@ namespace WebAPI.Controllers
         {
             return Ok(await usersService.GetAll());
         }
-
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
@@ -28,18 +28,16 @@ namespace WebAPI.Controllers
             if (item == null) return NotFound();
             return Ok(item);
         }
-
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] User user)
+        public async Task<IActionResult> Create([FromBody] UserDTO userDTO)
         {
-            await usersService.Create(user);
+            await usersService.Create(userDTO);
             return Ok();
         }
-
         [HttpPut]
-        public async Task<IActionResult> Edit([FromBody] User user)
+        public async Task<IActionResult> Edit([FromBody] UserDTO userDTO)
         {
-            await usersService.Edit(user);
+            await usersService.Edit(userDTO);
             return Ok();
         }
 
