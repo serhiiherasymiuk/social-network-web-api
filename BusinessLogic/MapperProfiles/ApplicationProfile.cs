@@ -17,6 +17,8 @@ namespace Core.MapperProfiles
                 .ForMember(dest => dest.DateCreated, opt => opt.MapFrom(src => DateTime.Now));
 
             CreateMap<Like, LikeDTO>().ReverseMap();
+
+            CreateMap<Message, MessageDTO>().ReverseMap();
         }
     }
 }
