@@ -22,6 +22,9 @@ namespace Core.MapperProfiles
                 .ForMember(dest => dest.DateSent, opt => opt.MapFrom(src => DateTime.Now));
 
             CreateMap<Follow, FollowDTO>().ReverseMap();
+
+            CreateMap<Notification, NotificationDTO>().ReverseMap()
+                .ForMember(dest => dest.DateCreated, opt => opt.MapFrom(src => DateTime.Now));
         }
     }
 }
