@@ -15,6 +15,8 @@ namespace Core.MapperProfiles
 
             CreateMap<Comment, CommentDTO>().ReverseMap()
                 .ForMember(dest => dest.DateCreated, opt => opt.MapFrom(src => DateTime.Now));
+
+            CreateMap<Like, LikeDTO>().ReverseMap();
         }
     }
 }
