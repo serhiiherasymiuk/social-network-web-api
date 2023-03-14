@@ -35,7 +35,7 @@ namespace Core.Specifications
             public ByUserId(int userId)
             {
                 Query
-                    .Where(x => x.UserId == userId)
+                    //.Where(x => x.UserId == userId)
                     .Include(x => x.Comments)
                     .Include(x => x.Likes);
             }

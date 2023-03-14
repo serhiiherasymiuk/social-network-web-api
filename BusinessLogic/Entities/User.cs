@@ -1,11 +1,9 @@
-﻿namespace Core.Entities
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace Core.Entities
 {
-    public class User
+    public class User : IdentityUser
     {
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
         public string ProfilePictureUrl { get; set; }
         public ICollection<Post> Posts { get; set; }
         public ICollection<Comment> Comments { get; set; }

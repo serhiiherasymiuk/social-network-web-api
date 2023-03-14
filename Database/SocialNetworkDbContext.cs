@@ -1,10 +1,11 @@
 ﻿using Core.Entities;
 using Infrastructure.Configurations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
 {
-    public class SocialNetworkDbContext : DbContext
+    public class SocialNetworkDbContext : IdentityDbContext<User>
     {
         public SocialNetworkDbContext() : base() { }
         public SocialNetworkDbContext(DbContextOptions options) : base(options) { }
@@ -25,7 +26,6 @@ namespace Infrastructure
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SocialNetworkWebAPI;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
-        public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Like> Likes { get; set; }
