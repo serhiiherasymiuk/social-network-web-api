@@ -16,7 +16,7 @@ namespace Core.Specifications
             public ById(int id)
             {
                 Query
-                    .Where(x => x.Id == id)
+                    //.Where(x => x.Id == id)
                     .Include(x => x.Posts)
                     .Include(x => x.Comments)
                     .Include(x => x.Likes)
@@ -32,7 +32,7 @@ namespace Core.Specifications
             public OrderedAll()
             {
                 Query
-                    .OrderBy(x => x.Username)
+                    //.OrderBy(x => x.Username)
                     .Include(x => x.Posts)
                     .Include(x => x.Comments)
                     .Include(x => x.Likes)
