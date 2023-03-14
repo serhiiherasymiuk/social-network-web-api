@@ -21,5 +21,11 @@ namespace WebAPI.Controllers
         {
             return Ok(await usersService.GetById(id));
         }
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterDTO register)
+        {
+            await usersService.Register(register);
+            return Ok();
+        }
     }
 }
