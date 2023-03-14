@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using Core.DTOs;
+using Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace Core.Interfaces
 {
     public interface IPostsService
     {
-        Task<IEnumerable<Post>> GetAll();
-        Task<Post?> GetById(int id);
-        Task<IEnumerable<Post>> GetByUserId(int userId);
-        Task Create(Post post);
-        Task Edit(Post post);
+        Task<IEnumerable<PostDTO>> GetAll();
+        Task<PostDTO?> GetById(int id);
+        Task<IEnumerable<PostDTO>> GetByUserId(int userId);
+        Task Create(PostDTO post);
+        Task Edit(PostDTO post);
         Task Delete(int id);
     }
 }

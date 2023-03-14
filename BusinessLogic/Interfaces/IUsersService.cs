@@ -1,13 +1,14 @@
-﻿using Core.Entities;
+﻿using Core.DTOs;
+using Core.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Core.Interfaces
 {
     public interface IUsersService
     {
-        Task<IEnumerable<User>> GetAll();
-        Task<User?> GetById(int id);
-        Task Create(User user);
-        Task Edit(User user);
-        Task Delete(int id);
+        Task<IdentityUser> GetById(string id);
+        Task Login(LoginDTO loginDTO);
+        Task Register(RegisterDTO registerDTO);
+        Task Logout();
     }
 }

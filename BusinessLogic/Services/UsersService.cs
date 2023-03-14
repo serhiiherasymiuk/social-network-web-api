@@ -1,44 +1,62 @@
-﻿using Core.Interfaces;
+﻿using Core.DTOs;
 using Core.Entities;
-using Core.Specifications;
+using Core.Helpers;
+using Core.Interfaces;
+using Core.Resources;
+using Microsoft.AspNetCore.Identity;
+using System.Net;
 
 namespace Core.Services
 {
     public class UsersService : IUsersService
     {
-        private readonly IRepository<User> usersRepo;
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
 
-        public UsersService(IRepository<User> usersRepo)
+        public UsersService(UserManager<IdentityUser> userManager,
+                               SignInManager<IdentityUser> signInManager)
         {
-            this.usersRepo = usersRepo;
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
-        public async Task<IEnumerable<User>> GetAll()
+        public async Task<IdentityUser> GetById(string id)
         {
-            return await usersRepo.GetAllBySpec(new Users.OrderedAll());
-        }
-
-        public async Task<User?> GetById(int id)
-        {
-            return await usersRepo.GetBySpec(new Users.ById(id));
-        }
-
-        public async Task Edit(User post)
-        {
-            await usersRepo.Update(post);
-            await usersRepo.Save();
+            var user = await userManager.FindByIdAsync(id);
+            if (user == null)
+                throw new HttpException(ErrorMessages.UserByIdNotFound, HttpStatusCode.NotFound);
+            return user;
         }
 
-        public async Task Create(User post)
+        public async Task Login(LoginDTO login)
         {
-            await usersRepo.Insert(post);
-            await usersRepo.Save();
+            var user = await userManager.FindByNameAsync(login.Username);
+            if (user == null || !await userManager.CheckPasswordAsync(user, login.Password))
+                throw new HttpException(ErrorMessages.InvalidCreds, HttpStatusCode.BadRequest);
+            await signInManager.SignInAsync(user, true);
         }
 
-        public async Task Delete(int id)
+        public async Task Logout()
         {
-            if (await usersRepo.GetByID(id) == null) return;
-            await usersRepo.Delete(id);
-            await usersRepo.Save();
+            await signInManager.SignOutAsync();
+        }
+
+        public async Task Register(RegisterDTO register) 
+        {
+            IdentityUser user = new()
+            {
+                UserName = register.Username,
+                Email = register.Email,
+                PhoneNumber = register.PhoneNumber
+            };
+
+            var result = await userManager.CreateAsync(user, register.Password);
+
+            if (!result.Succeeded)
+            {
+                string message = string.Join(", ", result.Errors.Select(x => x.Description));
+
+                throw new HttpException(message, HttpStatusCode.BadRequest);
+            }
         }
     }
 }
