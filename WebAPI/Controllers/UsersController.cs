@@ -2,6 +2,7 @@
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Core.DTOs;
+using Core.Services;
 
 namespace WebAPI.Controllers
 {
@@ -14,6 +15,11 @@ namespace WebAPI.Controllers
         public UsersController(IUsersService usersService)
         {
             this.usersService = usersService;
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get([FromRoute] string id)
+        {
+            return Ok(await usersService.GetById(id));
         }
     }
 }
