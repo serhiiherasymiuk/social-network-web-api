@@ -27,5 +27,11 @@ namespace WebAPI.Controllers
             await usersService.Register(register);
             return Ok();
         }
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDTO login)
+        {
+            await usersService.Login(login);
+            return Ok();
+        }
     }
 }
