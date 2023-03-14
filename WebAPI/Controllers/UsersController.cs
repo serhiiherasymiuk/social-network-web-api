@@ -33,5 +33,11 @@ namespace WebAPI.Controllers
             await usersService.Login(login);
             return Ok();
         }
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await usersService.Logout();
+            return Ok();
+        }
     }
 }
