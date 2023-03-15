@@ -31,7 +31,7 @@ namespace Core.Services
                 throw new HttpException(ErrorMessages.PostByIdNotFound, HttpStatusCode.NotFound);
             return mapper.Map<PostDTO>(post);
         }
-        public async Task<IEnumerable<PostDTO>> GetByUserId(int userId)
+        public async Task<IEnumerable<PostDTO>> GetByUserId(string userId)
         {
             var posts = await postsRepo.GetAllBySpec(new Posts.ByUserId(userId));
             return mapper.Map<IEnumerable<PostDTO>>(posts);
