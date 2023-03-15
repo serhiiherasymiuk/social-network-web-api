@@ -38,15 +38,15 @@ namespace WebAPI.Controllers
             return Ok(item);
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] PostDTO createPostDTO)
+        public async Task<IActionResult> Create([FromBody] PostDTO post)
         {
-            await postsService.Create(createPostDTO);
+            await postsService.Create(post);
             return Ok();
         }
         [HttpPut]
-        public async Task<IActionResult> Edit([FromBody] PostDTO createPostDTO)
+        public async Task<IActionResult> Edit([FromBody] PostDTO post)
         {
-            await postsService.Edit(createPostDTO);
+            await postsService.Edit(post);
             return Ok();
         }
         [HttpDelete("{id}")]
