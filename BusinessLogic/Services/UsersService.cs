@@ -20,6 +20,7 @@ namespace Core.Services
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
+
         public async Task<User> GetById(string id)
         {
             var user = await userManager.Users.Where(u => u.Id == id)
@@ -65,6 +66,20 @@ namespace Core.Services
             {
                 string message = string.Join(", ", result.Errors.Select(x => x.Description));
 
+                throw new HttpException(message, HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task Delete(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if (user == null)
+                throw new HttpException(ErrorMessages.UserByIdNotFound, HttpStatusCode.NotFound);
+
+            var result = await userManager.DeleteAsync(user);
+            if (!result.Succeeded)
+            {
+                string message = string.Join(", ", result.Errors.Select(x => x.Description));
                 throw new HttpException(message, HttpStatusCode.BadRequest);
             }
         }

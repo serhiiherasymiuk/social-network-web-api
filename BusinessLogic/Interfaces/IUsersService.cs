@@ -10,5 +10,6 @@ namespace Core.Interfaces
         Task Login(LoginDTO loginDTO);
         Task Register(RegisterDTO registerDTO);
         Task Logout();
+        Task Delete(string id);
     }
 }
