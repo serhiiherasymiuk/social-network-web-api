@@ -6,7 +6,7 @@ namespace Core.Interfaces
 {
     public interface IUsersService
     {
-        Task<User> GetById(string id);
+        Task<UserDTO> GetById(string id);
         Task Login(LoginDTO loginDTO);
         Task Register(RegisterDTO registerDTO);
         Task Logout();
