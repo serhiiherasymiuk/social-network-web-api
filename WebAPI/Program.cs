@@ -1,5 +1,6 @@
 using Core.Interfaces;
 using Core.Services;
+using Core.Entities;
 using Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -16,14 +17,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<SocialNetworkDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("LocalDb")));
 
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<SocialNetworkDbContext>()
+    .AddDefaultTokenProviders();
+
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IOpenAIService, OpenAIService>();
 builder.Services.AddScoped<IPostsService, PostsService>();
-
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<SocialNetworkDbContext>()
-    .AddDefaultTokenProviders();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -39,6 +40,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

@@ -10,16 +10,16 @@ namespace Core.Services
 {
     public class UsersService : IUsersService
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
 
-        public UsersService(UserManager<IdentityUser> userManager,
-                               SignInManager<IdentityUser> signInManager)
+        public UsersService(UserManager<User> userManager,
+                               SignInManager<User> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-        public async Task<IdentityUser> GetById(string id)
+        public async Task<User> GetById(string id)
         {
             var user = await userManager.FindByIdAsync(id);
             if (user == null)
@@ -42,7 +42,7 @@ namespace Core.Services
 
         public async Task Register(RegisterDTO register) 
         {
-            IdentityUser user = new()
+            User user = new()
             {
                 UserName = register.Username,
                 Email = register.Email,
