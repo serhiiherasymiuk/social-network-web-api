@@ -6,6 +6,7 @@ using Core.Resources;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using AutoMapper;
 
 namespace Core.Services
 {
@@ -13,15 +14,18 @@ namespace Core.Services
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
+        private readonly IMapper mapper;
 
         public UsersService(UserManager<User> userManager,
-                               SignInManager<User> signInManager)
+                               SignInManager<User> signInManager,
+                                   IMapper mapper)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.mapper = mapper;
         }
 
-        public async Task<User> GetById(string id)
+        public async Task<UserDTO> GetById(string id)
         {
             var user = await userManager.Users.Where(u => u.Id == id)
                 .Include(x => x.Posts)
@@ -35,7 +39,7 @@ namespace Core.Services
                 .FirstOrDefaultAsync();
             if (user == null)
                 throw new HttpException(ErrorMessages.UserByIdNotFound, HttpStatusCode.NotFound);
-            return user;
+            return mapper.Map<UserDTO>(user);
         }
 
         public async Task Login(LoginDTO login)
