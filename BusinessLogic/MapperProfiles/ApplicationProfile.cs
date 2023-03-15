@@ -11,8 +11,6 @@ namespace Core.MapperProfiles
             CreateMap<Post, PostDTO>().ReverseMap()
                 .ForMember(dest => dest.DateCreated, opt => opt.MapFrom(src => DateTime.Now));
 
-            CreateMap<User, UserDTO>().ReverseMap();
-
             CreateMap<Comment, CommentDTO>().ReverseMap()
                 .ForMember(dest => dest.DateCreated, opt => opt.MapFrom(src => DateTime.Now));
 

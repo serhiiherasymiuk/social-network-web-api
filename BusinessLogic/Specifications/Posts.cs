@@ -32,7 +32,7 @@ namespace Core.Specifications
         }
         public class ByUserId : Specification<Post>
         {
-            public ByUserId(int userId)
+            public ByUserId(string userId)
             {
                 Query
                     .Where(x => x.UserId == userId)

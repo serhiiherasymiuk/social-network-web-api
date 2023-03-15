@@ -1,49 +1,87 @@
-﻿using Core.Interfaces;
+﻿using Core.DTOs;
 using Core.Entities;
-using Core.Specifications;
-using Core.DTOs;
-using AutoMapper;
+using Core.Helpers;
+using Core.Interfaces;
+using Core.Resources;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace Core.Services
 {
     public class UsersService : IUsersService
     {
-        private readonly IRepository<User> usersRepo;
-        private readonly IMapper mapper;
-        public UsersService(IRepository<User> usersRepo, IMapper mapper)
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
+
+        public UsersService(UserManager<User> userManager,
+                               SignInManager<User> signInManager)
         {
-            this.usersRepo = usersRepo;
-            this.mapper = mapper;
-        }
-        public async Task<IEnumerable<UserDTO>> GetAll()
-        {
-            var users = await usersRepo.GetAllBySpec(new Users.OrderedAll());
-            return mapper.Map<IEnumerable<UserDTO>>(users);
+            this.userManager = userManager;
+            this.signInManager = signInManager;
         }
 
-        public async Task<UserDTO?> GetById(int id)
+        public async Task<User> GetById(string id)
         {
-            User user = await usersRepo.GetBySpec(new Users.ById(id));
-            return mapper.Map<UserDTO>(user);
+            var user = await userManager.Users.Where(u => u.Id == id)
+                .Include(x => x.Posts)
+                .Include(x => x.Comments)
+                .Include(x => x.Likes)
+                .Include(x => x.Followers)
+                .Include(x => x.FollowedUsers)
+                .Include(x => x.SentMessages)
+                .Include(x => x.ReceivedMessages)
+                .Include(x => x.Notifications)
+                .FirstOrDefaultAsync();
+            if (user == null)
+                throw new HttpException(ErrorMessages.UserByIdNotFound, HttpStatusCode.NotFound);
+            return user;
         }
 
-        public async Task Edit(UserDTO userDTO)
+        public async Task Login(LoginDTO login)
         {
-            await usersRepo.Update(mapper.Map<User>(userDTO));
-            await usersRepo.Save();
+            var user = await userManager.FindByNameAsync(login.Username);
+            if (user == null || !await userManager.CheckPasswordAsync(user, login.Password))
+                throw new HttpException(ErrorMessages.InvalidCreds, HttpStatusCode.BadRequest);
+            await signInManager.SignInAsync(user, true);
         }
 
-        public async Task Create(UserDTO userDTO)
+        public async Task Logout()
         {
-            await usersRepo.Insert(mapper.Map<User>(userDTO));
-            await usersRepo.Save();
+            await signInManager.SignOutAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task Register(RegisterDTO register) 
         {
-            if (await usersRepo.GetByID(id) == null) return;
-            await usersRepo.Delete(id);
-            await usersRepo.Save();
+            User user = new()
+            {
+                UserName = register.Username,
+                Email = register.Email,
+                PhoneNumber = register.PhoneNumber
+            };
+
+            var result = await userManager.CreateAsync(user, register.Password);
+
+            if (!result.Succeeded)
+            {
+                string message = string.Join(", ", result.Errors.Select(x => x.Description));
+
+                throw new HttpException(message, HttpStatusCode.BadRequest);
+            }
+        }
+
+        public async Task Delete(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if (user == null)
+                throw new HttpException(ErrorMessages.UserByIdNotFound, HttpStatusCode.NotFound);
+
+            var result = await userManager.DeleteAsync(user);
+            if (!result.Succeeded)
+            {
+                string message = string.Join(", ", result.Errors.Select(x => x.Description));
+                throw new HttpException(message, HttpStatusCode.BadRequest);
+            }
         }
     }
 }

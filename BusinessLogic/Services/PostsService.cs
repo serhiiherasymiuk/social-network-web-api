@@ -3,6 +3,9 @@ using Core.Entities;
 using Core.Specifications;
 using Core.DTOs;
 using AutoMapper;
+using Core.Helpers;
+using System.Net;
+using Core.Resources;
 
 namespace Core.Services
 {
@@ -24,9 +27,11 @@ namespace Core.Services
         public async Task<PostDTO?> GetById(int id)
         {
             Post post = await postsRepo.GetBySpec(new Posts.ById(id));
+            if (post == null)
+                throw new HttpException(ErrorMessages.PostByIdNotFound, HttpStatusCode.NotFound);
             return mapper.Map<PostDTO>(post);
         }
-        public async Task<IEnumerable<PostDTO>> GetByUserId(int userId)
+        public async Task<IEnumerable<PostDTO>> GetByUserId(string userId)
         {
             var posts = await postsRepo.GetAllBySpec(new Posts.ByUserId(userId));
             return mapper.Map<IEnumerable<PostDTO>>(posts);
@@ -45,7 +50,8 @@ namespace Core.Services
 
         public async Task Delete(int id)
         {
-            if (await postsRepo.GetByID(id) == null) return;
+            if (await postsRepo.GetByID(id) == null)
+                throw new HttpException(ErrorMessages.PostByIdNotFound, HttpStatusCode.NotFound);
             await postsRepo.Delete(id);
             await postsRepo.Save();
         }

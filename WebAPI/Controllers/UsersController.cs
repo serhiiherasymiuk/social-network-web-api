@@ -2,6 +2,7 @@
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Core.DTOs;
+using Core.Services;
 
 namespace WebAPI.Controllers
 {
@@ -15,36 +16,27 @@ namespace WebAPI.Controllers
         {
             this.usersService = usersService;
         }
-
-        [HttpGet]
-        public async Task<IActionResult> Get()
-        {
-            return Ok(await usersService.GetAll());
-        }
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get([FromRoute] int id)
+        public async Task<IActionResult> Get([FromRoute] string id)
         {
-            var item = await usersService.GetById(id);
-            if (item == null) return NotFound();
-            return Ok(item);
+            return Ok(await usersService.GetById(id));
         }
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] UserDTO userDTO)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterDTO register)
         {
-            await usersService.Create(userDTO);
+            await usersService.Register(register);
             return Ok();
         }
-        [HttpPut]
-        public async Task<IActionResult> Edit([FromBody] UserDTO userDTO)
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
-            await usersService.Edit(userDTO);
+            await usersService.Login(login);
             return Ok();
         }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
         {
-            await usersService.Delete(id);
+            await usersService.Logout();
             return Ok();
         }
     }
