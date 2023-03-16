@@ -6,5 +6,7 @@
         public string Content { get; set; }
         public DateTime DateCreated { get; set; }
         public string UserId { get; set; }
+        public ICollection<CommentDTO>? Comments { get; set; }
+        public ICollection<LikeDTO>? Likes { get; set; }
     }
 }

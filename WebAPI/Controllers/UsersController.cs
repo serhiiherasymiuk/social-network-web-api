@@ -16,6 +16,11 @@ namespace WebAPI.Controllers
         {
             this.usersService = usersService;
         }
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await usersService.GetAll());
+        }
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] string id)
         {
