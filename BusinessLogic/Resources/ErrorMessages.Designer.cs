@@ -70,6 +70,24 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comment Like requested id not found.
+        /// </summary>
+        internal static string CommentLikeByIdNotFound {
+            get {
+                return ResourceManager.GetString("CommentLikeByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Follow requested id not found.
+        /// </summary>
+        internal static string FollowByIdNotFound {
+            get {
+                return ResourceManager.GetString("FollowByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid login or password.
         /// </summary>
         internal static string InvalidCreds {
@@ -79,11 +97,38 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Message requested id not found.
+        /// </summary>
+        internal static string MessageByIdNotFound {
+            get {
+                return ResourceManager.GetString("MessageByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification Like requested id not found.
+        /// </summary>
+        internal static string NotificationByIdNotFound {
+            get {
+                return ResourceManager.GetString("NotificationByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Post with requested id not found.
         /// </summary>
         internal static string PostByIdNotFound {
             get {
                 return ResourceManager.GetString("PostByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Post Like requested id not found.
+        /// </summary>
+        internal static string PostLikeByIdNotFound {
+            get {
+                return ResourceManager.GetString("PostLikeByIdNotFound", resourceCulture);
             }
         }
         

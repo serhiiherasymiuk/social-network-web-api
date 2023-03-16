@@ -5,12 +5,7 @@ using Core.Helpers;
 using Core.Interfaces;
 using Core.Resources;
 using Core.Specifications;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Services
 {
@@ -26,7 +21,7 @@ namespace Core.Services
         }
         public async Task<IEnumerable<CommentDTO>> GetAll()
         {
-            var commnets = await commentsRepo.GetAll();
+            var commnets = await commentsRepo.GetAllBySpec(new Comments.OrderedByLikes());
             return mapper.Map<IEnumerable<CommentDTO>>(commnets);
         }
         public async Task<CommentDTO?> GetById(int id)

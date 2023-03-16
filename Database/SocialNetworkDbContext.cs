@@ -20,6 +20,8 @@ namespace Infrastructure
             modelBuilder.ApplyConfiguration(new FollowConfigurations());
             modelBuilder.ApplyConfiguration(new MessageConfigurations());
             modelBuilder.ApplyConfiguration(new NotificationConfigurations());
+            modelBuilder.ApplyConfiguration(new PostLikeConfigurations());
+            modelBuilder.ApplyConfiguration(new CommentLikeConfiguration());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
