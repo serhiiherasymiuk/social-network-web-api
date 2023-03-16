@@ -7,6 +7,6 @@
         public DateTime DateCreated { get; set; }
         public string UserId { get; set; }
         public ICollection<CommentDTO>? Comments { get; set; }
-        public ICollection<PostLikeDTO>? Likes { get; set; }
+        public ICollection<PostLikeDTO>? PostLikes { get; set; }
     }
 }
