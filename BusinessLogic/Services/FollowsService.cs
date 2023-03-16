@@ -14,12 +14,12 @@ using System.Threading.Tasks;
 
 namespace Core.Services
 {
-    public class FollowService : IFollowsService
+    public class FollowsService : IFollowsService
     {
         private readonly IRepository<Follow> followsRepo;
         private readonly IMapper mapper;
 
-        public FollowService(IRepository<Follow> followsRepo, IMapper mapper)
+        public FollowsService(IRepository<Follow> followsRepo, IMapper mapper)
         {
             this.followsRepo = followsRepo;
             this.mapper = mapper;
