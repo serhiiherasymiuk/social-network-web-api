@@ -70,6 +70,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comment Like requested id not found.
+        /// </summary>
+        internal static string CommentLikeByIdNotFound {
+            get {
+                return ResourceManager.GetString("CommentLikeByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid login or password.
         /// </summary>
         internal static string InvalidCreds {
@@ -84,6 +93,15 @@ namespace Core.Resources {
         internal static string PostByIdNotFound {
             get {
                 return ResourceManager.GetString("PostByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Post Like requested id not found.
+        /// </summary>
+        internal static string PostLikeByIdNotFound {
+            get {
+                return ResourceManager.GetString("PostLikeByIdNotFound", resourceCulture);
             }
         }
         

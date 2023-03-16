@@ -28,7 +28,7 @@ namespace Core.Services
         {
             CommentLike commentLike = await commentLikesRepo.GetBySpec(new CommentLikes.ById(id));
             if (commentLike == null)
-                throw new HttpException(ErrorMessages.PostByIdNotFound, HttpStatusCode.NotFound);
+                throw new HttpException(ErrorMessages.CommentLikeByIdNotFound, HttpStatusCode.NotFound);
             return mapper.Map<CommentLikeDTO>(commentLike);
         }
         public async Task<IEnumerable<CommentLikeDTO>> GetAll()
@@ -59,7 +59,7 @@ namespace Core.Services
         public async Task Delete(int id)
         {
             if (await commentLikesRepo.GetByID(id) == null)
-                throw new HttpException(ErrorMessages.PostByIdNotFound, HttpStatusCode.NotFound);
+                throw new HttpException(ErrorMessages.CommentLikeByIdNotFound, HttpStatusCode.NotFound);
             await commentLikesRepo.Delete(id);
             await commentLikesRepo.Save();
         }
