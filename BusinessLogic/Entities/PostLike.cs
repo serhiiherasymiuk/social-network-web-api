@@ -1,6 +1,6 @@
 ﻿namespace Core.Entities
 {
-    public class Like
+    public class PostLike
     {
         public int Id { get; set; }
         public string UserId { get; set; }

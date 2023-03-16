@@ -1,10 +1,5 @@
 ﻿using Ardalis.Specification;
 using Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Specifications
 {
@@ -17,7 +12,7 @@ namespace Core.Specifications
                 Query
                     .Where(x => x.Id == id)
                     .Include(x => x.Comments)
-                    .Include(x => x.Likes);
+                    .Include(x => x.PostLikes);
             }
         }
         public class OrderedByLikes : Specification<Post>
@@ -25,19 +20,19 @@ namespace Core.Specifications
             public OrderedByLikes()
             {
                 Query
-                    .OrderBy(x => x.Likes.Count)
+                    .OrderBy(x => x.PostLikes.Count)
                     .Include(x => x.Comments)
-                    .Include(x => x.Likes);
+                    .Include(x => x.PostLikes);
             }
         }
         public class ByUserId : Specification<Post>
         {
-            public ByUserId(int userId)
+            public ByUserId(string userId)
             {
                 Query
-                    //.Where(x => x.UserId == userId)
+                    .Where(x => x.UserId == userId)
                     .Include(x => x.Comments)
-                    .Include(x => x.Likes);
+                    .Include(x => x.PostLikes);
             }
         }
     }

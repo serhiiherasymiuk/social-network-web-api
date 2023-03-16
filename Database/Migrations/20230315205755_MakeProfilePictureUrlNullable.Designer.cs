@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(SocialNetworkDbContext))]
-    partial class SocialNetworkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230315205755_MakeProfilePictureUrlNullable")]
+    partial class MakeProfilePictureUrlNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,30 +55,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Core.Entities.CommentLike", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CommentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("CommentLikes");
-                });
-
             modelBuilder.Entity("Core.Entities.Follow", b =>
                 {
                     b.Property<int>("Id")
@@ -100,6 +78,30 @@ namespace Infrastructure.Migrations
                     b.HasIndex("FollowerId");
 
                     b.ToTable("Follows");
+                });
+
+            modelBuilder.Entity("Core.Entities.Like", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Core.Entities.Message", b =>
@@ -184,30 +186,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("Core.Entities.PostLike", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("PostLikes");
                 });
 
             modelBuilder.Entity("Core.Entities.User", b =>
@@ -430,25 +408,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Core.Entities.CommentLike", b =>
-                {
-                    b.HasOne("Core.Entities.Comment", "Comment")
-                        .WithMany("CommentLikes")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Core.Entities.User", "User")
-                        .WithMany("CommentLikes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Comment");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Core.Entities.Follow", b =>
                 {
                     b.HasOne("Core.Entities.User", "FollowedUser")
@@ -466,6 +425,25 @@ namespace Infrastructure.Migrations
                     b.Navigation("FollowedUser");
 
                     b.Navigation("Follower");
+                });
+
+            modelBuilder.Entity("Core.Entities.Like", b =>
+                {
+                    b.HasOne("Core.Entities.Post", "Post")
+                        .WithMany("Likes")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.User", "User")
+                        .WithMany("Likes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Core.Entities.Message", b =>
@@ -505,25 +483,6 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Core.Entities.PostLike", b =>
-                {
-                    b.HasOne("Core.Entities.Post", "Post")
-                        .WithMany("PostLikes")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Core.Entities.User", "User")
-                        .WithMany("PostLikes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Post");
 
                     b.Navigation("User");
                 });
@@ -579,31 +538,24 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Core.Entities.Comment", b =>
-                {
-                    b.Navigation("CommentLikes");
-                });
-
             modelBuilder.Entity("Core.Entities.Post", b =>
                 {
                     b.Navigation("Comments");
 
-                    b.Navigation("PostLikes");
+                    b.Navigation("Likes");
                 });
 
             modelBuilder.Entity("Core.Entities.User", b =>
                 {
-                    b.Navigation("CommentLikes");
-
                     b.Navigation("Comments");
 
                     b.Navigation("FollowedUsers");
 
                     b.Navigation("Followers");
 
-                    b.Navigation("Notifications");
+                    b.Navigation("Likes");
 
-                    b.Navigation("PostLikes");
+                    b.Navigation("Notifications");
 
                     b.Navigation("Posts");
 

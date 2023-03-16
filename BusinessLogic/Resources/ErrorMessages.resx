@@ -117,11 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CommentByIdNotFound" xml:space="preserve">
+    <value>Comment with requested id not found</value>
+  </data>
+  <data name="CommentLikeByIdNotFound" xml:space="preserve">
+    <value>Comment Like requested id not found</value>
+  </data>
+  <data name="FollowByIdNotFound" xml:space="preserve">
+    <value>Follow requested id not found</value>
+  </data>
   <data name="InvalidCreds" xml:space="preserve">
     <value>Invalid login or password</value>
   </data>
+  <data name="MessageByIdNotFound" xml:space="preserve">
+    <value>Message requested id not found</value>
+  </data>
+  <data name="NotificationByIdNotFound" xml:space="preserve">
+    <value>Notification Like requested id not found</value>
+  </data>
   <data name="PostByIdNotFound" xml:space="preserve">
     <value>Post with requested id not found</value>
+  </data>
+  <data name="PostLikeByIdNotFound" xml:space="preserve">
+    <value>Post Like requested id not found</value>
   </data>
   <data name="UserByIdNotFound" xml:space="preserve">
     <value>User with requested id not found</value>

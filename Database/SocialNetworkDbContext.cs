@@ -16,10 +16,12 @@ namespace Infrastructure
 
             modelBuilder.ApplyConfiguration(new PostConfigurations());
             modelBuilder.ApplyConfiguration(new CommentConfigurations());
-            modelBuilder.ApplyConfiguration(new LikeConfigurations());
+            modelBuilder.ApplyConfiguration(new PostLikeConfigurations());
             modelBuilder.ApplyConfiguration(new FollowConfigurations());
             modelBuilder.ApplyConfiguration(new MessageConfigurations());
             modelBuilder.ApplyConfiguration(new NotificationConfigurations());
+            modelBuilder.ApplyConfiguration(new PostLikeConfigurations());
+            modelBuilder.ApplyConfiguration(new CommentLikeConfiguration());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,7 +30,8 @@ namespace Infrastructure
         }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Like> Likes { get; set; }
+        public DbSet<PostLike> PostLikes { get; set; }
+        public DbSet<CommentLike> CommentLikes { get; set; }
         public DbSet<Follow> Follows { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Notification> Notifications { get; set; }

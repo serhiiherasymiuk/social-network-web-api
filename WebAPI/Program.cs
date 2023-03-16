@@ -1,5 +1,6 @@
 using Core.Interfaces;
 using Core.Services;
+using Core.Entities;
 using Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,7 @@ builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IOpenAIService, OpenAIService>();
 builder.Services.AddScoped<IPostsService, PostsService>();
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<SocialNetworkDbContext>()
     .AddDefaultTokenProviders();
 
@@ -39,6 +40,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

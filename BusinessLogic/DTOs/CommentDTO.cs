@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Core.DTOs
+﻿namespace Core.DTOs
 {
     public class CommentDTO
     {
@@ -13,5 +7,6 @@ namespace Core.DTOs
         public DateTime DateCreated { get; set; }
         public int UserId { get; set; }
         public int PostId { get; set; }
+        public ICollection<CommentLikeDTO>? CommentLikes { get; set; }
     }
 }

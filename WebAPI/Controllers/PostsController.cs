@@ -1,7 +1,5 @@
 ﻿using Core.DTOs;
-using Core.Entities;
 using Core.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -31,7 +29,7 @@ namespace WebAPI.Controllers
             return Ok(item);
         }
         [HttpGet("byUserId/{userId}")]
-        public async Task<IActionResult> GetByUserId([FromRoute] int userId)
+        public async Task<IActionResult> GetByUserId([FromRoute] string userId)
         {
             var item = await postsService.GetByUserId(userId);
             if (item == null) return NotFound();
