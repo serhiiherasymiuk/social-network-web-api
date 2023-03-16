@@ -1,10 +1,5 @@
 ﻿using Ardalis.Specification;
 using Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Specifications
 {
@@ -17,6 +12,15 @@ namespace Core.Specifications
                 Query
                     .Where(c => c.Id == id)
                     .Include(c => c.CommentLikes);
+            }
+        }
+        public class OrderedByLikes : Specification<Comment>
+        {
+            public OrderedByLikes()
+            {
+                Query
+                    .OrderBy(x => x.CommentLikes.Count)
+                    .Include(x => x.CommentLikes);
             }
         }
         public class ByUserId : Specification<Comment>

@@ -1,11 +1,5 @@
 ﻿using Ardalis.Specification;
 using Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Core.Specifications
 {
@@ -19,7 +13,7 @@ namespace Core.Specifications
                     .Where(c => c.Id == id);
             }
         }
-        public class ByUserId : Specification<Comment>
+        public class ByUserId : Specification<Notification>
         {
             public ByUserId(string userId)
             {

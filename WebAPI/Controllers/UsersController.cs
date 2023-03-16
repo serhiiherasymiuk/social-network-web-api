@@ -1,8 +1,6 @@
 ﻿using Core.Interfaces;
-using Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Core.DTOs;
-using Core.Services;
 
 namespace WebAPI.Controllers
 {

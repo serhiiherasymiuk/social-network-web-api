@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 using AutoMapper;
-using Core.Specifications;
 
 namespace Core.Services
 {
