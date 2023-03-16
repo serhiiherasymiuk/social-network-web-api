@@ -61,6 +61,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comment with requested id not found.
+        /// </summary>
+        internal static string CommentByIdNotFound {
+            get {
+                return ResourceManager.GetString("CommentByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid login or password.
         /// </summary>
         internal static string InvalidCreds {
