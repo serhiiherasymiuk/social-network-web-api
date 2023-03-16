@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Core.Services
 {
-    public class NotificationsService : INotificationService
+    public class NotificationsService : INotificationsService
     {
         private readonly IRepository<Notification> notificationsRepo;
         private readonly IMapper mapper;

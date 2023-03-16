@@ -2,7 +2,7 @@
 
 namespace Core.Interfaces
 {
-    public interface INotificationService
+    public interface INotificationsService
     {
         Task<IEnumerable<NotificationDTO>> GetAll();
         Task<NotificationDTO?> GetById(int id);
