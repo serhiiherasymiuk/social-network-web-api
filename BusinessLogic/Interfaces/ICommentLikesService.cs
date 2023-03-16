@@ -11,7 +11,7 @@ namespace Core.Interfaces
     {
         Task<IEnumerable<CommentLikeDTO>> GetAll();
         Task<IEnumerable<CommentLikeDTO>> GetByUserId(string userId);
-        Task<IEnumerable<CommentLikeDTO>> GetByCommentId(string userId);
+        Task<IEnumerable<CommentLikeDTO>> GetByCommentId(int commentId);
         Task Create(CommentLikeDTO commentLike);
         Task Edit(CommentLikeDTO commentLike);
         Task Delete(int id);
