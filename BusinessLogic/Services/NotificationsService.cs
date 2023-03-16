@@ -34,7 +34,7 @@ namespace Core.Services
         {
             Notification notification = await notificationsRepo.GetBySpec(new Notifications.ById(id));
             if (notification == null)
-                throw new HttpException(ErrorMessages.PostByIdNotFound, HttpStatusCode.NotFound);
+                throw new HttpException(ErrorMessages.NotificationByIdNotFound, HttpStatusCode.NotFound);
             return mapper.Map<NotificationDTO>(notification);
         }
 
@@ -58,7 +58,7 @@ namespace Core.Services
         public async Task Delete(int id)
         {
             if (await notificationsRepo.GetByID(id) == null)
-                throw new HttpException(ErrorMessages.PostByIdNotFound, HttpStatusCode.NotFound);
+                throw new HttpException(ErrorMessages.NotificationByIdNotFound, HttpStatusCode.NotFound);
             await notificationsRepo.Delete(id);
             await notificationsRepo.Save();
         }

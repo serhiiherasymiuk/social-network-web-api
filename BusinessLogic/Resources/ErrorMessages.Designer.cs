@@ -88,6 +88,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notification Like requested id not found.
+        /// </summary>
+        internal static string NotificationByIdNotFound {
+            get {
+                return ResourceManager.GetString("NotificationByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Post with requested id not found.
         /// </summary>
         internal static string PostByIdNotFound {

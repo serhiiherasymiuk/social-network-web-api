@@ -126,6 +126,9 @@
   <data name="InvalidCreds" xml:space="preserve">
     <value>Invalid login or password</value>
   </data>
+  <data name="NotificationByIdNotFound" xml:space="preserve">
+    <value>Notification Like requested id not found</value>
+  </data>
   <data name="PostByIdNotFound" xml:space="preserve">
     <value>Post with requested id not found</value>
   </data>
