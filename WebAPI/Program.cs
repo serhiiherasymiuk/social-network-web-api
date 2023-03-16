@@ -22,6 +22,8 @@ builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IOpenAIService, OpenAIService>();
 builder.Services.AddScoped<IPostsService, PostsService>();
 builder.Services.AddScoped<ICommentsService, CommentsService>();
+builder.Services.AddScoped<IPostLikesService, PostLikesService>();
+builder.Services.AddScoped<ICommentLikesService, CommentLikesService>();
 
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<SocialNetworkDbContext>()

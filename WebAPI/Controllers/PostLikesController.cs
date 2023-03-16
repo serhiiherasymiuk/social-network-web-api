@@ -8,57 +8,57 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CommentsController : ControllerBase
+    public class PostLikesController : ControllerBase
     {
-        private readonly ICommentsService commentsService;
+        private readonly IPostLikesService postLikesService;
 
-        public CommentsController(ICommentsService commentsService)
+        public PostLikesController(IPostLikesService postLikesService)
         {
-            this.commentsService = commentsService;
+            this.postLikesService = postLikesService;
         }
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await commentsService.GetAll());
+            return Ok(await postLikesService.GetAll());
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
-            var item = await commentsService.GetById(id);
+            var item = await postLikesService.GetById(id);
             if (item == null) return NotFound();
             return Ok(item);
         }
         [HttpGet("getByUserId/{userId}")]
         public async Task<IActionResult> GetByUserId([FromRoute] string userId)
         {
-            var item = await commentsService.GetByUserId(userId);
+            var item = await postLikesService.GetByUserId(userId);
             if (item == null) return NotFound();
             return Ok(item);
         }
         [HttpGet("getByPostId/{postId}")]
         public async Task<IActionResult> GetByPostId([FromRoute] int postId)
         {
-            var item = await commentsService.GetByPostId(postId);
+            var item = await postLikesService.GetByPostId(postId);
             if (item == null) return NotFound();
             return Ok(item);
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CommentDTO comment)
+        public async Task<IActionResult> Create([FromBody] PostLikeDTO postLike)
         {
-            await commentsService.Create(comment);
+            await postLikesService.Create(postLike);
             return Ok();
         }
         [HttpPut]
-        public async Task<IActionResult> Edit([FromBody] CommentDTO comment)
+        public async Task<IActionResult> Edit([FromBody] PostLikeDTO postLike)
         {
-            await commentsService.Edit(comment);
+            await postLikesService.Edit(postLike);
             return Ok();
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            await commentsService.Delete(id);
+            await postLikesService.Delete(id);
             return Ok();
         }
     }
