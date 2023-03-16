@@ -1,4 +1,6 @@
-﻿namespace Core.Entities
+﻿using Core.DTOs;
+
+namespace Core.Entities
 {
     public class Comment
     {

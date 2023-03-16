@@ -40,7 +40,7 @@ namespace Core.Specifications
                     .Include(x => x.FollowedUsers)
                     .Include(x => x.SentMessages)
                     .Include(x => x.ReceivedMessages)
-                    .Include(x => x.Notifications); ;
+                    .Include(x => x.Notifications);
             }
         }
     }
