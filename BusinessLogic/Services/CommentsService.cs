@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Core.Services
 {
-    public class CommentsService
+    public class CommentsService : ICommentsService
     {
         private readonly IRepository<Comment> commentsRepo;
         private readonly IMapper mapper;
@@ -41,7 +41,12 @@ namespace Core.Services
             var comments = await commentsRepo.GetAllBySpec(new Comments.ByUserId(userId));
             return mapper.Map<IEnumerable<CommentDTO>>(comments);
         }
-        public async Task Edit(PostDTO comment)
+        public async Task<IEnumerable<CommentDTO>> GetByPostId(int postId)
+        {
+            var comments = await commentsRepo.GetAllBySpec(new Comments.ByPostId(postId));
+            return mapper.Map<IEnumerable<CommentDTO>>(comments);
+        }
+        public async Task Edit(CommentDTO comment)
         {
             await commentsRepo.Update(mapper.Map<Comment>(comment));
             await commentsRepo.Save();
