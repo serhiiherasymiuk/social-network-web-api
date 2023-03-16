@@ -12,8 +12,8 @@ namespace Core.Interfaces
         Task<IEnumerable<PostLikeDTO>> GetAll();
         Task<IEnumerable<PostLikeDTO>> GetByUserId(string userId);
         Task<IEnumerable<PostLikeDTO>> GetByPostId(string userId);
-        Task Create(PostLikeDTO post);
-        Task Edit(PostLikeDTO post);
+        Task Create(PostLikeDTO postLike);
+        Task Edit(PostLikeDTO postLike);
         Task Delete(int id);
     }
 }
