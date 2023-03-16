@@ -3,7 +3,7 @@
     public class FollowDTO
     {
         public int Id { get; set; }
-        public int FollowerId { get; set; }
-        public int FollowedUserId { get; set; }
+        public string FollowerId { get; set; }
+        public string FollowedUserId { get; set; }
     }
 }
