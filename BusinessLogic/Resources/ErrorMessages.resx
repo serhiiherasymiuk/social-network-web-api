@@ -123,11 +123,14 @@
   <data name="CommentLikeByIdNotFound" xml:space="preserve">
     <value>Comment Like requested id not found</value>
   </data>
+  <data name="FollowByIdNotFound" xml:space="preserve">
+    <value>Follow requested id not found</value>
+  </data>
   <data name="InvalidCreds" xml:space="preserve">
     <value>Invalid login or password</value>
   </data>
   <data name="MessageByIdNotFound" xml:space="preserve">
-    <value>Message Like requested id not found</value>
+    <value>Message requested id not found</value>
   </data>
   <data name="NotificationByIdNotFound" xml:space="preserve">
     <value>Notification Like requested id not found</value>

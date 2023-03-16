@@ -79,6 +79,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Follow requested id not found.
+        /// </summary>
+        internal static string FollowByIdNotFound {
+            get {
+                return ResourceManager.GetString("FollowByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid login or password.
         /// </summary>
         internal static string InvalidCreds {
@@ -88,7 +97,7 @@ namespace Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Message Like requested id not found.
+        ///   Looks up a localized string similar to Message requested id not found.
         /// </summary>
         internal static string MessageByIdNotFound {
             get {
