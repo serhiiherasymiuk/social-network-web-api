@@ -4,16 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Configurations
 {
-    public class LikeConfigurations : IEntityTypeConfiguration<Like>
+    public class PostLikeConfigurations : IEntityTypeConfiguration<PostLike>
     {
-        public void Configure(EntityTypeBuilder<Like> builder)
+        public void Configure(EntityTypeBuilder<PostLike> builder)
         {
             builder
                 .HasOne(l => l.User)
-                .WithMany(u => u.Likes);
+                .WithMany(u => u.PostLikes);
             builder
                 .HasOne(l => l.Post)
-                .WithMany(p => p.Likes);
+                .WithMany(p => p.PostLikes);
         }
     }
 }

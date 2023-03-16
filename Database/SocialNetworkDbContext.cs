@@ -16,7 +16,7 @@ namespace Infrastructure
 
             modelBuilder.ApplyConfiguration(new PostConfigurations());
             modelBuilder.ApplyConfiguration(new CommentConfigurations());
-            modelBuilder.ApplyConfiguration(new LikeConfigurations());
+            modelBuilder.ApplyConfiguration(new PostLikeConfigurations());
             modelBuilder.ApplyConfiguration(new FollowConfigurations());
             modelBuilder.ApplyConfiguration(new MessageConfigurations());
             modelBuilder.ApplyConfiguration(new NotificationConfigurations());
