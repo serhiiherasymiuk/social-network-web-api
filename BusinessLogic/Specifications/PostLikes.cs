@@ -9,7 +9,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Core.Specifications
 {
-    public class PostLikes
+    public static class PostLikes
     {
         public class ById : Specification<PostLike>
         {
