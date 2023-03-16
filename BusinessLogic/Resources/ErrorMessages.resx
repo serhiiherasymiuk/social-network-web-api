@@ -141,6 +141,9 @@
   <data name="PostLikeByIdNotFound" xml:space="preserve">
     <value>Post Like requested id not found</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
   <data name="UserByIdNotFound" xml:space="preserve">
     <value>User with requested id not found</value>
   </data>
