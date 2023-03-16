@@ -56,6 +56,22 @@ namespace Core.Services
                 .ToListAsync();
             return mapper.Map<IEnumerable<UserDTO>>(users);
         }
+        public async Task<IEnumerable<UserDTO>> GetLikedUsersByPostId(int id)
+        {
+            var users = await userManager.Users
+                .Where(x => x.PostLikes.Any(x => x.PostId == id))
+                .Include(x => x.Posts)
+                .Include(x => x.Comments)
+                .Include(x => x.PostLikes)
+                .Include(x => x.CommentLikes)
+                .Include(x => x.Followers)
+                .Include(x => x.FollowedUsers)
+                .Include(x => x.SentMessages)
+                .Include(x => x.ReceivedMessages)
+                .Include(x => x.Notifications)
+                .ToListAsync();
+            return mapper.Map<IEnumerable<UserDTO>>(users);
+        }
         public async Task<UserDTO> GetById(string id)
         {
             var user = await userManager.Users.Where(u => u.Id == id)
