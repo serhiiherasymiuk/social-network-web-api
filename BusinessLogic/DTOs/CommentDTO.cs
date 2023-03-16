@@ -13,5 +13,6 @@ namespace Core.DTOs
         public DateTime DateCreated { get; set; }
         public int UserId { get; set; }
         public int PostId { get; set; }
+        public ICollection<CommentLikeDTO>? CommentLikes { get; set; }
     }
 }

@@ -15,7 +15,8 @@ namespace Core.Specifications
             public ById(int id)
             {
                 Query
-                    .Where(x => x.Id == id);
+                    .Where(c => c.Id == id)
+                    .Include(c => c.CommentLikes);
             }
         }
         public class ByUserId : Specification<Comment>
@@ -23,7 +24,8 @@ namespace Core.Specifications
             public ByUserId(string userId)
             {
                 Query
-                    .Where(x => x.UserId == userId);
+                    .Where(c => c.UserId == userId)
+                    .Include(c => c.CommentLikes);
             }
         }
         public class ByPostId : Specification<Comment>
@@ -31,7 +33,8 @@ namespace Core.Specifications
             public ByPostId(int postId)
             {
                 Query
-                    .Where(x => x.PostId == postId);
+                    .Where(c => c.PostId == postId)
+                    .Include(c => c.CommentLikes);
             }
         }
     }

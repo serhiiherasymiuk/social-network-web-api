@@ -15,7 +15,7 @@ namespace Core.DTOs
         public string ProfilePictureUrl { get; set; }
         public ICollection<PostDTO>? Posts { get; set; }
         public ICollection<CommentDTO>? Comments { get; set; }
-        public ICollection<LikeDTO>? Likes { get; set; }
+        public ICollection<PostLikeDTO>? Likes { get; set; }
         public ICollection<FollowDTO>? Followers { get; set; }
         public ICollection<FollowDTO>? FollowedUsers { get; set; }
         public ICollection<MessageDTO>? SentMessages { get; set; }

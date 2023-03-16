@@ -17,7 +17,7 @@ namespace Core.Specifications
                 Query
                     .Where(x => x.Id == id)
                     .Include(x => x.Comments)
-                    .Include(x => x.Likes);
+                    .Include(x => x.PostLikes);
             }
         }
         public class OrderedByLikes : Specification<Post>
@@ -25,9 +25,9 @@ namespace Core.Specifications
             public OrderedByLikes()
             {
                 Query
-                    .OrderBy(x => x.Likes.Count)
+                    .OrderBy(x => x.PostLikes.Count)
                     .Include(x => x.Comments)
-                    .Include(x => x.Likes);
+                    .Include(x => x.PostLikes);
             }
         }
         public class ByUserId : Specification<Post>
@@ -37,7 +37,7 @@ namespace Core.Specifications
                 Query
                     .Where(x => x.UserId == userId)
                     .Include(x => x.Comments)
-                    .Include(x => x.Likes);
+                    .Include(x => x.PostLikes);
             }
         }
     }
