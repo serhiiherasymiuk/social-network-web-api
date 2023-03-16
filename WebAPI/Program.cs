@@ -26,6 +26,7 @@ builder.Services.AddScoped<IPostLikesService, PostLikesService>();
 builder.Services.AddScoped<ICommentLikesService, CommentLikesService>();
 builder.Services.AddScoped<IMessagesService, MessagesService>();
 builder.Services.AddScoped<IFollowsService, FollowsService>();
+builder.Services.AddScoped<INotificationsService, NotificationsService>();
 
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<SocialNetworkDbContext>()
