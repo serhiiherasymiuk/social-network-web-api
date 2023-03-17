@@ -33,8 +33,8 @@ namespace WebAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO login)
         {
-            await usersService.Login(login);
-            return Ok();
+            var response = await usersService.Login(login);
+            return Ok(response);
         }
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()

@@ -8,7 +8,7 @@ namespace Core.Interfaces
         Task<UserDTO> GetById(string id);
         Task<IEnumerable<UserDTO>> GetLikedUsersByCommentId(int id);
         Task<IEnumerable<UserDTO>> GetLikedUsersByPostId(int id);
-        Task Login(LoginDTO loginDTO);
+        Task<LoginResponseDto> Login(LoginDTO loginDTO);
         Task Register(RegisterDTO registerDTO);
         Task Logout();
         Task Delete(string id);
