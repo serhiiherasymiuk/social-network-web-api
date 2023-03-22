@@ -1,59 +1,57 @@
 ﻿using Core.DTOs;
 using Core.Interfaces;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+using Core.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostsController : ControllerBase
+    public class NotificationController : ControllerBase
     {
-        private readonly IPostsService postsService;
+        private readonly INotificationsService notificationService;
 
-        public PostsController(IPostsService postsService)
+        public NotificationController(INotificationsService notificationService)
         {
-            this.postsService = postsService;
+            this.notificationService = notificationService;
         }
-
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await postsService.GetAll());
+            return Ok(await notificationService.GetAll());
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
-            var item = await postsService.GetById(id);
+            var item = await notificationService.GetById(id);
             if (item == null) return NotFound();
             return Ok(item);
         }
         [HttpGet("getByUserId/{userId}")]
         public async Task<IActionResult> GetByUserId([FromRoute] string userId)
         {
-            var item = await postsService.GetByUserId(userId);
+            var item = await notificationService.GetByUserId(userId);
             if (item == null) return NotFound();
             return Ok(item);
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] PostDTO post)
+        public async Task<IActionResult> Create([FromBody] NotificationDTO notification)
         {
-            await postsService.Create(post);
+            await notificationService.Create(notification);
             return Ok();
         }
         [HttpPut]
-        public async Task<IActionResult> Edit([FromBody] PostDTO post)
+        public async Task<IActionResult> Edit([FromBody] NotificationDTO notification)
         {
-            await postsService.Edit(post);
+            await notificationService.Edit(notification);
             return Ok();
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            await postsService.Delete(id);
+            await notificationService.Delete(id);
             return Ok();
         }
     }

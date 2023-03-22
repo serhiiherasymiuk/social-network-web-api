@@ -15,14 +15,17 @@ namespace Core.Services
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly IMapper mapper;
+        private readonly IJwtService jwtService;
 
         public UsersService(UserManager<User> userManager,
-                               SignInManager<User> signInManager,
-                                   IMapper mapper)
+                            SignInManager<User> signInManager,
+                            IMapper mapper,
+                            IJwtService jwtService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.mapper = mapper;
+            this.jwtService = jwtService;
         }
         public async Task<IEnumerable<UserDTO>> GetAll()
         {
@@ -89,12 +92,17 @@ namespace Core.Services
             return mapper.Map<UserDTO>(user);
         }
 
-        public async Task Login(LoginDTO login)
+        public async Task<LoginResponseDto> Login(LoginDTO login)
         {
             var user = await userManager.FindByNameAsync(login.Username);
             if (user == null || !await userManager.CheckPasswordAsync(user, login.Password))
                 throw new HttpException(ErrorMessages.InvalidCreds, HttpStatusCode.BadRequest);
             await signInManager.SignInAsync(user, true);
+
+            return new LoginResponseDto()
+            {
+                Token = jwtService.CreateToken(jwtService.GetClaims(user))
+            };
         }
 
         public async Task Logout()
