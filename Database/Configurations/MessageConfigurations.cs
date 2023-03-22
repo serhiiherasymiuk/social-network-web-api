@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Configurations
 {
-    public class MessageConfigurations : IEntityTypeConfiguration<Message>
+    public class MessageConfigurations : IEntityTypeConfiguration<GroupChatMessage>
     {
-        public void Configure(EntityTypeBuilder<Message> builder)
+        public void Configure(EntityTypeBuilder<GroupChatMessage> builder)
         {
             builder
                 .HasOne(m => m.Sender)

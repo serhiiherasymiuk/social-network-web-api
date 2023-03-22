@@ -33,7 +33,7 @@ namespace Infrastructure
         public DbSet<PostLike> PostLikes { get; set; }
         public DbSet<CommentLike> CommentLikes { get; set; }
         public DbSet<Follow> Follows { get; set; }
-        public DbSet<Message> Messages { get; set; }
+        public DbSet<GroupChatMessage> Messages { get; set; }
         public DbSet<Notification> Notifications { get; set; }
     }
 }

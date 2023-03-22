@@ -11,7 +11,7 @@ namespace Core.Specifications
 {
     public class Messages
     {
-        public class ById : Specification<Message>
+        public class ById : Specification<GroupChatMessage>
         {
             public ById(int id)
             {
@@ -19,7 +19,7 @@ namespace Core.Specifications
                     .Where(c => c.Id == id);
             }
         }
-        public class BySenderId : Specification<Message>
+        public class BySenderId : Specification<GroupChatMessage>
         {
             public BySenderId(string id)
             {
@@ -27,7 +27,7 @@ namespace Core.Specifications
                     .Where(c => c.SenderId == id);
             }
         }
-        public class ByRecipientId : Specification<Message>
+        public class ByRecipientId : Specification<GroupChatMessage>
         {
             public ByRecipientId(string id)
             {

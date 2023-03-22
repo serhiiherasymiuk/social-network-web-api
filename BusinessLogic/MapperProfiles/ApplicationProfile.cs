@@ -20,7 +20,7 @@ namespace Core.MapperProfiles
 
             CreateMap<CommentLike, CommentLikeDTO>().ReverseMap();
 
-            CreateMap<Message, MessageDTO>().ReverseMap()
+            CreateMap<GroupChatMessage, MessageDTO>().ReverseMap()
                 .ForMember(dest => dest.DateSent, opt => opt.MapFrom(src => DateTime.Now));
 
             CreateMap<Follow, FollowDTO>().ReverseMap();

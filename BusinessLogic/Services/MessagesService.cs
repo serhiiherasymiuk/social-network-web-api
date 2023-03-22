@@ -16,10 +16,10 @@ namespace Core.Services
 {
     public class MessagesService : IMessagesService
     {
-        private readonly IRepository<Message> messagesRepo;
+        private readonly IRepository<GroupChatMessage> messagesRepo;
         private readonly IMapper mapper;
 
-        public MessagesService(IRepository<Message> messagesRepo, IMapper mapper)
+        public MessagesService(IRepository<GroupChatMessage> messagesRepo, IMapper mapper)
         {
             this.messagesRepo = messagesRepo;
             this.mapper = mapper;
@@ -32,7 +32,7 @@ namespace Core.Services
         }
         public async Task<MessageDTO?> GetById(int id)
         {
-            Message message = await messagesRepo.GetBySpec(new Messages.ById(id));
+            GroupChatMessage message = await messagesRepo.GetBySpec(new Messages.ById(id));
             if (message == null)
                 throw new HttpException(ErrorMessages.MessageByIdNotFound, HttpStatusCode.NotFound);
             return mapper.Map<MessageDTO>(message);
@@ -49,13 +49,13 @@ namespace Core.Services
         }
         public async Task Edit(MessageDTO message)
         {
-            await messagesRepo.Update(mapper.Map<Message>(message));
+            await messagesRepo.Update(mapper.Map<GroupChatMessage>(message));
             await messagesRepo.Save();
         }
 
         public async Task Create(MessageDTO message)
         {
-            await messagesRepo.Insert(mapper.Map<Message>(message));
+            await messagesRepo.Insert(mapper.Map<GroupChatMessage>(message));
             await messagesRepo.Save();
         }
 
