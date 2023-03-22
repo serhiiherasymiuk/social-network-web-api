@@ -10,7 +10,7 @@ namespace Core.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<User> Users { get; set; }
+        public ICollection<User> Members { get; set; }
         public ICollection<GroupChatMessage> Messages { get; set; }
     }
 }
