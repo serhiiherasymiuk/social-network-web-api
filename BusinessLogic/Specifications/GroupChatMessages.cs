@@ -9,30 +9,30 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Core.Specifications
 {
-    public class Messages
+    public class GroupChatMessages
     {
-        public class ById : Specification<Message>
+        public class ById : Specification<GroupChatMessage>
         {
             public ById(int id)
             {
                 Query
-                    .Where(c => c.Id == id);
+                    .Where(x => x.Id == id);
             }
         }
-        public class BySenderId : Specification<Message>
+        public class ByGroupChatId : Specification<GroupChatMessage>
         {
-            public BySenderId(string id)
+            public ByGroupChatId(int groupChatId)
             {
                 Query
-                    .Where(c => c.SenderId == id);
+                    .Where(x => x.GroupChatId == groupChatId);
             }
         }
-        public class ByRecipientId : Specification<Message>
+        public class BySenderId : Specification<GroupChatMessage>
         {
-            public ByRecipientId(string id)
+            public BySenderId(string senderId)
             {
                 Query
-                    .Where(c => c.RecipientId == id);
+                    .Where(x => x.SenderId == senderId);
             }
         }
     }

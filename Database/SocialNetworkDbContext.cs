@@ -18,10 +18,12 @@ namespace Infrastructure
             modelBuilder.ApplyConfiguration(new CommentConfigurations());
             modelBuilder.ApplyConfiguration(new PostLikeConfigurations());
             modelBuilder.ApplyConfiguration(new FollowConfigurations());
-            modelBuilder.ApplyConfiguration(new MessageConfigurations());
             modelBuilder.ApplyConfiguration(new NotificationConfigurations());
-            modelBuilder.ApplyConfiguration(new PostLikeConfigurations());
             modelBuilder.ApplyConfiguration(new CommentLikeConfiguration());
+            modelBuilder.ApplyConfiguration(new IndividualChatConfiguration());
+            modelBuilder.ApplyConfiguration(new IndividualChatMessageConfiguration());
+            modelBuilder.ApplyConfiguration(new GroupChatConfiguration());
+            modelBuilder.ApplyConfiguration(new GroupChatMessageConfiguration());
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -33,7 +35,10 @@ namespace Infrastructure
         public DbSet<PostLike> PostLikes { get; set; }
         public DbSet<CommentLike> CommentLikes { get; set; }
         public DbSet<Follow> Follows { get; set; }
-        public DbSet<Message> Messages { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<GroupChat> GroupChats { get; set; }
+        public DbSet<GroupChatMessage> GroupChatMessages { get; set; }
+        public DbSet<IndividualChat> IndividualChats { get; set; }
+        public DbSet<IndividualChatMessage> IndividualChatMessages { get; set; }
     }
 }

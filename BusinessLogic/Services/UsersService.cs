@@ -36,8 +36,10 @@ namespace Core.Services
                 .Include(x => x.CommentLikes)
                 .Include(x => x.Followers)
                 .Include(x => x.FollowedUsers)
-                .Include(x => x.SentMessages)
-                .Include(x => x.ReceivedMessages)
+                .Include(x => x.GroupChatMessages)
+                .Include(x => x.IndividualChatMessages)
+                .Include(x => x.GroupChats)
+                .Include(x => x.IndividualChats)
                 .Include(x => x.Notifications)
                 .ToListAsync();
             return mapper.Map<IEnumerable<UserDTO>>(users);
@@ -52,8 +54,10 @@ namespace Core.Services
                 .Include(x => x.CommentLikes)
                 .Include(x => x.Followers)
                 .Include(x => x.FollowedUsers)
-                .Include(x => x.SentMessages)
-                .Include(x => x.ReceivedMessages)
+                .Include(x => x.GroupChatMessages)
+                .Include(x => x.IndividualChatMessages)
+                .Include(x => x.GroupChats)
+                .Include(x => x.IndividualChats)
                 .Include(x => x.Notifications)
                 .ToListAsync();
             return mapper.Map<IEnumerable<UserDTO>>(users);
@@ -68,8 +72,10 @@ namespace Core.Services
                 .Include(x => x.CommentLikes)
                 .Include(x => x.Followers)
                 .Include(x => x.FollowedUsers)
-                .Include(x => x.SentMessages)
-                .Include(x => x.ReceivedMessages)
+                .Include(x => x.GroupChatMessages)
+                .Include(x => x.IndividualChatMessages)
+                .Include(x => x.GroupChats)
+                .Include(x => x.IndividualChats)
                 .Include(x => x.Notifications)
                 .ToListAsync();
             return mapper.Map<IEnumerable<UserDTO>>(users);
@@ -83,8 +89,10 @@ namespace Core.Services
                 .Include(x => x.CommentLikes)
                 .Include(x => x.Followers)
                 .Include(x => x.FollowedUsers)
-                .Include(x => x.SentMessages)
-                .Include(x => x.ReceivedMessages)
+                .Include(x => x.GroupChatMessages)
+                .Include(x => x.IndividualChatMessages)
+                .Include(x => x.GroupChats)
+                .Include(x => x.IndividualChats)
                 .Include(x => x.Notifications)
                 .FirstOrDefaultAsync();
             if (user == null)
@@ -141,6 +149,25 @@ namespace Core.Services
                 string message = string.Join(", ", result.Errors.Select(x => x.Description));
                 throw new HttpException(message, HttpStatusCode.BadRequest);
             }
+        }
+
+        public async Task<IEnumerable<UserDTO>> GetByGroupChatId(int id)
+        {
+            var users = await userManager.Users
+                .Where(x => x.GroupChats.Any(x => x.Id == id))
+                .Include(x => x.Posts)
+                .Include(x => x.Comments)
+                .Include(x => x.PostLikes)
+                .Include(x => x.CommentLikes)
+                .Include(x => x.Followers)
+                .Include(x => x.FollowedUsers)
+                .Include(x => x.GroupChatMessages)
+                .Include(x => x.IndividualChatMessages)
+                .Include(x => x.GroupChats)
+                .Include(x => x.IndividualChats)
+                .Include(x => x.Notifications)
+                .ToListAsync();
+            return mapper.Map<IEnumerable<UserDTO>>(users);
         }
     }
 }
