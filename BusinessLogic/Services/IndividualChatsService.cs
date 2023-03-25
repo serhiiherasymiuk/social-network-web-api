@@ -16,13 +16,11 @@ namespace Core.Services
 {
     internal class IndividualChatsService : IIndividualChatsService
     {
-        private readonly IRepository<User> usersRepo;
         private readonly IRepository<IndividualChat> individualChatsRepo;
         private readonly IMapper mapper;
 
-        public IndividualChatsService(IRepository<IndividualChat> individualChatsRepo, IRepository<User> usersRepo, IMapper mapper)
+        public IndividualChatsService(IRepository<IndividualChat> individualChatsRepo, IMapper mapper)
         {
-            this.usersRepo = usersRepo;
             this.individualChatsRepo = individualChatsRepo;
             this.mapper = mapper;
         }

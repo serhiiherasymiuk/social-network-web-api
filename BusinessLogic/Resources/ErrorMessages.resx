@@ -133,7 +133,10 @@
     <value>GroupChatMessage with requested id not found</value>
   </data>
   <data name="IndividualChatByIdNotFound" xml:space="preserve">
-    <value>IndividualChatById with requested id not found</value>
+    <value>IndividualChat with requested id not found</value>
+  </data>
+  <data name="IndividualChatMessageByIdNotFound" xml:space="preserve">
+    <value>IndividualChatMessage with requested id not found</value>
   </data>
   <data name="InvalidCreds" xml:space="preserve">
     <value>Invalid login or password</value>

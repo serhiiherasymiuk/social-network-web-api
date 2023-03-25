@@ -106,11 +106,20 @@ namespace Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to IndividualChatById with requested id not found.
+        ///   Looks up a localized string similar to IndividualChat with requested id not found.
         /// </summary>
         internal static string IndividualChatByIdNotFound {
             get {
                 return ResourceManager.GetString("IndividualChatByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IndividualChatMessage with requested id not found.
+        /// </summary>
+        internal static string IndividualChatMessageByIdNotFound {
+            get {
+                return ResourceManager.GetString("IndividualChatMessageByIdNotFound", resourceCulture);
             }
         }
         
