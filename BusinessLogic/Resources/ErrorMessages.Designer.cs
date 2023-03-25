@@ -106,6 +106,15 @@ namespace Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to IndividualChatById with requested id not found.
+        /// </summary>
+        internal static string IndividualChatByIdNotFound {
+            get {
+                return ResourceManager.GetString("IndividualChatByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid login or password.
         /// </summary>
         internal static string InvalidCreds {
