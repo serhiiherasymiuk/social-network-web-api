@@ -129,6 +129,9 @@
   <data name="GroupChatByIdNotFound" xml:space="preserve">
     <value>GroupChat with  requested id not found</value>
   </data>
+  <data name="GroupChatMessageByIdNotFound" xml:space="preserve">
+    <value>GroupChatMessage with requested id not found</value>
+  </data>
   <data name="InvalidCreds" xml:space="preserve">
     <value>Invalid login or password</value>
   </data>

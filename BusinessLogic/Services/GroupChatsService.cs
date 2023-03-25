@@ -14,13 +14,13 @@ using System.Threading.Tasks;
 
 namespace Core.Services
 {
-    public class GroupChatService : IGroupChatService
+    public class GroupChatsService : IGroupChatsService
     {
         private readonly IRepository<User> usersRepo;
         private readonly IRepository<GroupChat> groupChatsRepo;
         private readonly IMapper mapper;
 
-        public GroupChatService(IRepository<GroupChat> groupChatsRepo, IRepository<User> usersRepo, IMapper mapper)
+        public GroupChatsService(IRepository<GroupChat> groupChatsRepo, IRepository<User> usersRepo, IMapper mapper)
         {
             this.usersRepo = usersRepo;
             this.groupChatsRepo = groupChatsRepo;
@@ -55,10 +55,8 @@ namespace Core.Services
 
         public async Task<IEnumerable<GroupChatDTO>> GetAll()
         {
-            var groupChat = await groupChatsRepo.GetBySpec(new GroupChats.All());
-            if (groupChat == null)
-                throw new HttpException(ErrorMessages.GroupChatByIdNotFound, HttpStatusCode.NotFound);
-            return mapper.Map<IEnumerable<GroupChatDTO>>(groupChat);
+            var groupChats = await groupChatsRepo.GetAllBySpec(new GroupChats.All());
+            return mapper.Map<IEnumerable<GroupChatDTO>>(groupChats);
         }
 
         public async Task<GroupChatDTO> GetById(int id)
@@ -68,7 +66,11 @@ namespace Core.Services
                 throw new HttpException(ErrorMessages.GroupChatByIdNotFound, HttpStatusCode.NotFound);
             return mapper.Map<GroupChatDTO>(groupChat);
         }
-
+        public async Task<IEnumerable<GroupChatDTO>> GetByUserId(string userId)
+        {
+            var groupChats = await groupChatsRepo.GetAllBySpec(new GroupChats.ByUserId(userId));
+            return mapper.Map<IEnumerable<GroupChatDTO>>(groupChats);
+        }
         public async Task RemoveUser(int groupChatId, string userId)
         {
             GroupChat groupChat = await groupChatsRepo.GetBySpec(new GroupChats.ById(groupChatId));

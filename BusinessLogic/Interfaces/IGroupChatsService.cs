@@ -2,9 +2,10 @@
 
 namespace Core.Interfaces
 {
-    public interface IGroupChatService
+    public interface IGroupChatsService
     {
         Task<GroupChatDTO> GetById(int id);
+        Task<IEnumerable<GroupChatDTO>> GetByUserId(string userId);
         Task<IEnumerable<GroupChatDTO>> GetAll();
         Task Create(GroupChatDTO groupChatDto);
         Task Edit(GroupChatDTO groupChatDto);

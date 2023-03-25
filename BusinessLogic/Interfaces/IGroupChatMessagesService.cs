@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
-    public interface IGroupChatMessageService
+    public interface IGroupChatMessagesService
     {
         Task<IEnumerable<GroupChatMessageDTO>> GetAll();
         Task<GroupChatMessageDTO?> GetById(int id);
         Task<IEnumerable<GroupChatMessageDTO>> GetByGroupChatId(int groupChatId);
-        Task<IEnumerable<GroupChatMessageDTO>> GetBySenderId(int userId);
+        Task<IEnumerable<GroupChatMessageDTO>> GetBySenderId(string userId);
         Task Create(GroupChatMessageDTO groupChatMessage);
         Task Edit(GroupChatMessageDTO groupChatMessage);
         Task Delete(int id);

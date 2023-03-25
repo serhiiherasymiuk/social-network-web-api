@@ -21,6 +21,16 @@ namespace Core.Specifications
                     .Include(x => x.Members);
             }
         }
+        public class ByUserId : Specification<GroupChat>
+        {
+            public ByUserId(string userId)
+            {
+                Query
+                    .Where(x => x.Members.Any(m => m.Id == userId))
+                    .Include(x => x.Messages)
+                    .Include(x => x.Members);
+            }
+        }
         public class All : Specification<GroupChat>
         {
             public All()

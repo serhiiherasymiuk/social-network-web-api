@@ -21,7 +21,7 @@ namespace Core.Services
         }
         public async Task<IEnumerable<PostDTO>> GetAll()
         {
-            var posts = await postsRepo.GetAllBySpec(new Posts.OrderedByLikes());
+            var posts = await postsRepo.GetAllBySpec(new Posts.All());
             return mapper.Map<IEnumerable<PostDTO>>(posts);
         }
         public async Task<PostDTO?> GetById(int id)
