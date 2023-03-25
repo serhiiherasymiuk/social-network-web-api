@@ -9,7 +9,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class MessagesController : ControllerBase
     {
-        private readonly IMessagesService messagesService;
+        /*private readonly IMessagesService messagesService;
 
         public MessagesController(IMessagesService messagesService)
         {
@@ -60,6 +60,6 @@ namespace WebAPI.Controllers
         {
             await messagesService.Delete(id);
             return Ok();
-        }
+        }*/
     }
 }
