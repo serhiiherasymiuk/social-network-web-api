@@ -15,9 +15,9 @@ namespace Core.Specifications
                     .Include(x => x.PostLikes);
             }
         }
-        public class OrderedByLikes : Specification<Post>
+        public class All : Specification<Post>
         {
-            public OrderedByLikes()
+            public All()
             {
                 Query
                     .OrderBy(x => x.PostLikes.Count)
