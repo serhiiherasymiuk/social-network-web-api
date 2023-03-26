@@ -16,6 +16,10 @@ namespace Core
             services.AddScoped<ICommentLikesService, CommentLikesService>();
             services.AddScoped<IFollowsService, FollowsService>();
             services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IGroupChatsService, GroupChatsService>(); 
+            services.AddScoped<IIndividualChatsService, IndividualChatsService>();
+            services.AddScoped<IGroupChatMessagesService, GroupChatMessagesService>();
+            services.AddScoped<IIndividualChatMessagesService, IndividualChatMessagesService>();
         }
     }
 }

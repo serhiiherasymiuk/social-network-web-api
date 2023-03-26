@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Core.Services
 {
-    public class IndividualChatMessagesService
+    public class IndividualChatMessagesService : IIndividualChatMessagesService
     {
         private readonly IRepository<IndividualChatMessage> individualChatMessagesRepo;
         private readonly IMapper mapper;
@@ -24,38 +24,38 @@ namespace Core.Services
             this.individualChatMessagesRepo = individualChatMessagesRepo;
             this.mapper = mapper;
         }
-        public async Task<IEnumerable<IndividualChatMessage>> GetAll()
+        public async Task<IEnumerable<IndividualChatMessageDTO>> GetAll()
         {
             var individualChatMessages = await individualChatMessagesRepo.GetAll();
-            return mapper.Map<IEnumerable<IndividualChatMessage>>(individualChatMessages);
+            return mapper.Map<IEnumerable<IndividualChatMessageDTO>>(individualChatMessages);
         }
 
-        public async Task<IEnumerable<IndividualChatMessage>> GetByIndividualChatId(int individualChatId)
+        public async Task<IEnumerable<IndividualChatMessageDTO>> GetByIndividualChatId(int individualChatId)
         {
             var individualChatMessages = await individualChatMessagesRepo.GetAllBySpec(new IndividualChatMessages.ByIndividualChatId(individualChatId));
-            return mapper.Map<IEnumerable<IndividualChatMessage>>(individualChatMessages);
+            return mapper.Map<IEnumerable<IndividualChatMessageDTO>>(individualChatMessages);
         }
 
-        public async Task<IndividualChatMessage?> GetById(int id)
+        public async Task<IndividualChatMessageDTO?> GetById(int id)
         {
             IndividualChatMessage individualChatMessage = await individualChatMessagesRepo.GetBySpec(new IndividualChatMessages.ById(id));
             if (individualChatMessage == null)
                 throw new HttpException(ErrorMessages.IndividualChatMessageByIdNotFound, HttpStatusCode.NotFound);
-            return mapper.Map<IndividualChatMessage>(individualChatMessage);
+            return mapper.Map<IndividualChatMessageDTO>(individualChatMessage);
         }
 
-        public async Task<IEnumerable<IndividualChatMessage>> GetBySenderId(string userId)
+        public async Task<IEnumerable<IndividualChatMessageDTO>> GetBySenderId(string userId)
         {
             var individualChatMessage = await individualChatMessagesRepo.GetAllBySpec(new IndividualChatMessages.BySenderId(userId));
-            return mapper.Map<IEnumerable<IndividualChatMessage>>(individualChatMessage);
+            return mapper.Map<IEnumerable<IndividualChatMessageDTO>>(individualChatMessage);
         }
-        public async Task Edit(IndividualChatMessage individualChatMessage)
+        public async Task Edit(IndividualChatMessageDTO individualChatMessage)
         {
             await individualChatMessagesRepo.Update(mapper.Map<IndividualChatMessage>(individualChatMessage));
             await individualChatMessagesRepo.Save();
         }
 
-        public async Task Create(IndividualChatMessage individualChatMessage)
+        public async Task Create(IndividualChatMessageDTO individualChatMessage)
         {
             await individualChatMessagesRepo.Insert(mapper.Map<IndividualChatMessage>(individualChatMessage));
             await individualChatMessagesRepo.Save();

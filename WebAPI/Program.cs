@@ -10,6 +10,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using Core;
+using Core.Specifications;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +25,8 @@ builder.Services.AddJWT(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.SwagerConfig();
+
+builder.Services.NewtonsoftJsonConfig();
 
 builder.Services.AddDbContext(builder.Configuration.GetConnectionString("LocalDb"));
 

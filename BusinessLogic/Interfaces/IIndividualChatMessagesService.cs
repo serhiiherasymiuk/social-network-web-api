@@ -11,7 +11,7 @@ namespace Core.Interfaces
     {
         Task<IEnumerable<IndividualChatMessageDTO>> GetAll();
         Task<IndividualChatMessageDTO?> GetById(int id);
-        Task<IEnumerable<IndividualChatMessageDTO>> GetByIndividualChatId(int groupChatId);
+        Task<IEnumerable<IndividualChatMessageDTO>> GetByIndividualChatId(int individualChatId);
         Task<IEnumerable<IndividualChatMessageDTO>> GetBySenderId(string userId);
         Task Create(IndividualChatMessageDTO individualChatMessage);
         Task Edit(IndividualChatMessageDTO individualChatMessage);

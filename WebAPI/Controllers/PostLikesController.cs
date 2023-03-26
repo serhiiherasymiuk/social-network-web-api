@@ -25,9 +25,7 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
-            var item = await postLikesService.GetById(id);
-            if (item == null) return NotFound();
-            return Ok(item);
+            return Ok(await postLikesService.GetById(id));
         }
         [HttpGet("getByUserId/{userId}")]
         public async Task<IActionResult> GetByUserId([FromRoute] string userId)

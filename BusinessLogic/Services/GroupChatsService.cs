@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Core.Services
@@ -33,10 +35,12 @@ namespace Core.Services
             if (groupChat == null)
                 throw new HttpException(ErrorMessages.GroupChatByIdNotFound, HttpStatusCode.NotFound);
             User user = await usersRepo.GetBySpec(new Users.ById(userId));
-            if (groupChat == null)
+            if (user == null)
                 throw new HttpException(ErrorMessages.UserByIdNotFound, HttpStatusCode.NotFound);
             groupChat.Members.Add(user);
+            user.GroupChats.Add(groupChat);
             await groupChatsRepo.Save();
+            await usersRepo.Save();
         }
 
         public async Task Create(GroupChatDTO groupChat)
@@ -64,6 +68,11 @@ namespace Core.Services
             GroupChat groupChat = await groupChatsRepo.GetBySpec(new GroupChats.ById(id));
             if (groupChat == null)
                 throw new HttpException(ErrorMessages.GroupChatByIdNotFound, HttpStatusCode.NotFound);
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                WriteIndented = true
+            };
             return mapper.Map<GroupChatDTO>(groupChat);
         }
         public async Task<IEnumerable<GroupChatDTO>> GetByUserId(string userId)
@@ -80,6 +89,7 @@ namespace Core.Services
             if (groupChat == null)
                 throw new HttpException(ErrorMessages.UserByIdNotFound, HttpStatusCode.NotFound);
             groupChat.Members.Remove(user);
+            user.GroupChats.Remove(groupChat);
             await groupChatsRepo.Save();
         }
 
