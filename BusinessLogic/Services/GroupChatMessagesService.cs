@@ -39,9 +39,9 @@ namespace Core.Services
             return mapper.Map<GroupChatMessageDTO>(groupChatMessage);
         }
 
-        public async Task<IEnumerable<GroupChatMessageDTO>> GetBySenderId(string userId)
+        public async Task<IEnumerable<GroupChatMessageDTO>> GetByUserId(string userId)
         {
-            var groupChatMessages = await groupChatMessagesRepo.GetAllBySpec(new GroupChatMessages.BySenderId(userId));
+            var groupChatMessages = await groupChatMessagesRepo.GetAllBySpec(new GroupChatMessages.ByUserId(userId));
             return mapper.Map<IEnumerable<GroupChatMessageDTO>>(groupChatMessages);
         }
         public async Task Edit(GroupChatMessageDTO groupChatMessage)

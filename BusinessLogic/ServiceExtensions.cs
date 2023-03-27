@@ -15,6 +15,7 @@ namespace Core
             services.AddScoped<IPostLikesService, PostLikesService>();
             services.AddScoped<ICommentLikesService, CommentLikesService>();
             services.AddScoped<IFollowsService, FollowsService>();
+            services.AddScoped<INotificationsService, NotificationsService>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IGroupChatsService, GroupChatsService>(); 
             services.AddScoped<IIndividualChatsService, IndividualChatsService>();

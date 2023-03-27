@@ -25,16 +25,12 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
-            var item = await notificationService.GetById(id);
-            if (item == null) return NotFound();
-            return Ok(item);
+            return Ok(await notificationService.GetById(id));
         }
         [HttpGet("getByUserId/{userId}")]
         public async Task<IActionResult> GetByUserId([FromRoute] string userId)
         {
-            var item = await notificationService.GetByUserId(userId);
-            if (item == null) return NotFound();
-            return Ok(item);
+            return Ok(await notificationService.GetByUserId(userId));
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] NotificationDTO notification)

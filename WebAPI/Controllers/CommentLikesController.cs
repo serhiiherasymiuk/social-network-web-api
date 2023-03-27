@@ -25,23 +25,17 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
-            var item = await commentLikesService.GetById(id);
-            if (item == null) return NotFound();
-            return Ok(item);
+            return Ok(await commentLikesService.GetById(id));
         }
         [HttpGet("getByUserId/{userId}")]
         public async Task<IActionResult> GetByUserId([FromRoute] string userId)
         {
-            var item = await commentLikesService.GetByUserId(userId);
-            if (item == null) return NotFound();
-            return Ok(item);
+            return Ok(await commentLikesService.GetByUserId(userId));
         }
         [HttpGet("getByCommentId/{postId}")]
         public async Task<IActionResult> GetByCommentId([FromRoute] int commentId)
         {
-            var item = await commentLikesService.GetByCommentId(commentId);
-            if (item == null) return NotFound();
-            return Ok(item);
+            return Ok(await commentLikesService.GetByCommentId(commentId));
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CommentLikeDTO commentLike)

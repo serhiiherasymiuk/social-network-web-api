@@ -25,23 +25,17 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
-            var item = await followsService.GetById(id);
-            if (item == null) return NotFound();
-            return Ok(item);
+            return Ok(await followsService.GetById(id));
         }
         [HttpGet("getByFollowerId/{userId}")]
         public async Task<IActionResult> GetByFollowerId([FromRoute] string userId)
         {
-            var item = await followsService.GetByFollowerId(userId);
-            if (item == null) return NotFound();
-            return Ok(item);
+            return Ok(await followsService.GetByFollowerId(userId));
         }
         [HttpGet("getByFollowedUserId/{userId}")]
         public async Task<IActionResult> GetByFollowedUserId([FromRoute] string userId)
         {
-            var item = await followsService.GetByFollowedUserId(userId);
-            if (item == null) return NotFound();
-            return Ok(item);
+            return Ok(await followsService.GetByFollowedUserId(userId));
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] FollowDTO follow)

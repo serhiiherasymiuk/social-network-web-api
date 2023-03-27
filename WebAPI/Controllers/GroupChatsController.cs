@@ -45,9 +45,7 @@ namespace WebAPI.Controllers
         [HttpGet("getByUserId/{userId}")]
         public async Task<IActionResult> GetByUserId([FromRoute] string userId)
         {
-            var item = await groupChatsService.GetByUserId(userId);
-            if (item == null) return NotFound();
-            return Ok(item);
+            return Ok(await groupChatsService.GetByUserId(userId));
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] GroupChatDTO groupChat)
