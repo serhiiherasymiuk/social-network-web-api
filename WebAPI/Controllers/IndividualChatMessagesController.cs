@@ -51,7 +51,7 @@ namespace WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            await groupChatMessagesService.Delete(id);
+            await individualChatMessagesService.Delete(id);
             return Ok();
         }
     }
