@@ -68,5 +68,12 @@ namespace WebAPI
                 });
             });
         }
+        public static void NewtonsoftJsonConfig(this IServiceCollection services)
+        {
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+        }
     }
 }

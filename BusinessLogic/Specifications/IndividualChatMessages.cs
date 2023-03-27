@@ -27,9 +27,9 @@ namespace Core.Specifications
                     .Where(x => x.IndividualChatId == individualChatId);
             }
         }
-        public class BySenderId : Specification<IndividualChatMessage>
+        public class ByUserId : Specification<IndividualChatMessage>
         {
-            public BySenderId(string senderId)
+            public ByUserId(string senderId)
             {
                 Query
                     .Where(x => x.SenderId == senderId);

@@ -27,16 +27,12 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
-            var item = await postsService.GetById(id);
-            if (item == null) return NotFound();
-            return Ok(item);
+            return Ok(await postsService.GetById(id));
         }
         [HttpGet("getByUserId/{userId}")]
         public async Task<IActionResult> GetByUserId([FromRoute] string userId)
         {
-            var item = await postsService.GetByUserId(userId);
-            if (item == null) return NotFound();
-            return Ok(item);
+            return Ok(await postsService.GetByUserId(userId));
         }
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] PostDTO post)

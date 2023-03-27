@@ -1,6 +1,8 @@
 ﻿using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Core.DTOs;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace WebAPI.Controllers
 {

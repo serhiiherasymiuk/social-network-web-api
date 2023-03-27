@@ -8,46 +8,46 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NotificationController : ControllerBase
+    public class IndividualChatsController : ControllerBase
     {
-        private readonly INotificationsService notificationService;
+        private readonly IIndividualChatsService individualChatsService;
 
-        public NotificationController(INotificationsService notificationService)
+        public IndividualChatsController(IIndividualChatsService individualChatsService)
         {
-            this.notificationService = notificationService;
+            this.individualChatsService = individualChatsService;
         }
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await notificationService.GetAll());
+            return Ok(await individualChatsService.GetAll());
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] int id)
         {
-            return Ok(await notificationService.GetById(id));
+            return Ok(await individualChatsService.GetById(id));
         }
         [HttpGet("getByUserId/{userId}")]
         public async Task<IActionResult> GetByUserId([FromRoute] string userId)
         {
-            return Ok(await notificationService.GetByUserId(userId));
+            return Ok(await individualChatsService.GetByUserId(userId));
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] NotificationDTO notification)
+        public async Task<IActionResult> Create([FromBody] IndividualChatDTO individualChat)
         {
-            await notificationService.Create(notification);
+            await individualChatsService.Create(individualChat);
             return Ok();
         }
         [HttpPut]
-        public async Task<IActionResult> Edit([FromBody] NotificationDTO notification)
+        public async Task<IActionResult> Edit([FromBody] IndividualChatDTO individualChat)
         {
-            await notificationService.Edit(notification);
+            await individualChatsService.Edit(individualChat);
             return Ok();
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            await notificationService.Delete(id);
+            await individualChatsService.Delete(id);
             return Ok();
         }
     }
