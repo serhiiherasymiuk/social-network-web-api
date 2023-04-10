@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Core.DTOs;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Core.Services;
 
 namespace WebAPI.Controllers
 {
@@ -42,6 +43,12 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Logout()
         {
             await usersService.Logout();
+            return Ok();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] string id)
+        {
+            await usersService.Delete(id);
             return Ok();
         }
     }

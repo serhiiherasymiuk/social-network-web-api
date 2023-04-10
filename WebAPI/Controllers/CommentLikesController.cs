@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
         {
             return Ok(await commentLikesService.GetByUserId(userId));
         }
-        [HttpGet("getByCommentId/{postId}")]
+        [HttpGet("getByCommentId/{commentId}")]
         public async Task<IActionResult> GetByCommentId([FromRoute] int commentId)
         {
             return Ok(await commentLikesService.GetByCommentId(commentId));
