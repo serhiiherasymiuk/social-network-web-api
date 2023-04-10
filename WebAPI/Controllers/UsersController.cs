@@ -51,5 +51,11 @@ namespace WebAPI.Controllers
             await usersService.Delete(id);
             return Ok();
         }
+        [HttpPut]
+        public async Task<IActionResult> Edit([FromBody] UserDTO user)
+        {
+            await usersService.Edit(user);
+            return Ok();
+        }
     }
 }

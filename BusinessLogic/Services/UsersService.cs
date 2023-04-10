@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 using AutoMapper;
+using Core.Specifications;
 
 namespace Core.Services
 {
@@ -168,6 +169,15 @@ namespace Core.Services
                 .Include(x => x.Notifications)
                 .ToListAsync();
             return mapper.Map<IEnumerable<UserDTO>>(users);
+        }
+
+        public async Task Edit(UserDTO userDto)
+        {
+            var user = await userManager.FindByIdAsync(userDto.Id);
+            if (user == null)
+                throw new HttpException(ErrorMessages.UserByIdNotFound, HttpStatusCode.NotFound);
+            mapper.Map(userDto, user);
+            await userManager.UpdateAsync(user);
         }
     }
 }

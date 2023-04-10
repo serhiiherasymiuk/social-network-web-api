@@ -8,8 +8,9 @@ namespace Core.DTOs
         public string Id { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-        public string ProfilePictureUrl { get; set; }
-        public string ProfileBackgroundUrl { get; set; }
+        public string? ProfilePictureUrl { get; set; }
+        public string? ProfileBackgroundUrl { get; set; }
+        public string? DisplayUsername { get; set; }
         public ICollection<PostDTO>? Posts { get; set; }
         public ICollection<CommentDTO>? Comments { get; set; }
         public ICollection<PostLikeDTO>? PostLikes { get; set; }
