@@ -30,72 +30,24 @@ namespace Core.Services
         }
         public async Task<IEnumerable<UserDTO>> GetAll()
         {
-            var users = await userManager.Users
-                .Include(x => x.Posts)
-                .Include(x => x.Comments)
-                .Include(x => x.PostLikes)
-                .Include(x => x.CommentLikes)
-                .Include(x => x.Followers)
-                .Include(x => x.FollowedUsers)
-                .Include(x => x.GroupChatMessages)
-                .Include(x => x.IndividualChatMessages)
-                .Include(x => x.GroupChats)
-                .Include(x => x.IndividualChats)
-                .Include(x => x.Notifications)
-                .ToListAsync();
+            var users = await userManager.Users.ToListAsync();
             return mapper.Map<IEnumerable<UserDTO>>(users);
         }
         public async Task<IEnumerable<UserDTO>> GetLikedUsersByCommentId(int id)
         {
             var users = await userManager.Users
-                .Where(x => x.CommentLikes.Any(x => x.CommentId == id))
-                .Include(x => x.Posts)
-                .Include(x => x.Comments)
-                .Include(x => x.PostLikes)
-                .Include(x => x.CommentLikes)
-                .Include(x => x.Followers)
-                .Include(x => x.FollowedUsers)
-                .Include(x => x.GroupChatMessages)
-                .Include(x => x.IndividualChatMessages)
-                .Include(x => x.GroupChats)
-                .Include(x => x.IndividualChats)
-                .Include(x => x.Notifications)
-                .ToListAsync();
+                .Where(x => x.CommentLikes.Any(x => x.CommentId == id)).ToListAsync();
             return mapper.Map<IEnumerable<UserDTO>>(users);
         }
         public async Task<IEnumerable<UserDTO>> GetLikedUsersByPostId(int id)
         {
             var users = await userManager.Users
-                .Where(x => x.PostLikes.Any(x => x.PostId == id))
-                .Include(x => x.Posts)
-                .Include(x => x.Comments)
-                .Include(x => x.PostLikes)
-                .Include(x => x.CommentLikes)
-                .Include(x => x.Followers)
-                .Include(x => x.FollowedUsers)
-                .Include(x => x.GroupChatMessages)
-                .Include(x => x.IndividualChatMessages)
-                .Include(x => x.GroupChats)
-                .Include(x => x.IndividualChats)
-                .Include(x => x.Notifications)
-                .ToListAsync();
+                .Where(x => x.PostLikes.Any(x => x.PostId == id)).ToListAsync();
             return mapper.Map<IEnumerable<UserDTO>>(users);
         }
         public async Task<UserDTO> GetById(string id)
         {
-            var user = await userManager.Users.Where(u => u.Id == id)
-                .Include(x => x.Posts)
-                .Include(x => x.Comments)
-                .Include(x => x.PostLikes)
-                .Include(x => x.CommentLikes)
-                .Include(x => x.Followers)
-                .Include(x => x.FollowedUsers)
-                .Include(x => x.GroupChatMessages)
-                .Include(x => x.IndividualChatMessages)
-                .Include(x => x.GroupChats)
-                .Include(x => x.IndividualChats)
-                .Include(x => x.Notifications)
-                .FirstOrDefaultAsync();
+            var user = await userManager.Users.Where(u => u.Id == id).FirstOrDefaultAsync();
             if (user == null)
                 throw new HttpException(ErrorMessages.UserByIdNotFound, HttpStatusCode.NotFound);
             return mapper.Map<UserDTO>(user);
