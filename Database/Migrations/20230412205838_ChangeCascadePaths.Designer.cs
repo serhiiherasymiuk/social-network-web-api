@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(SocialNetworkDbContext))]
-    partial class SocialNetworkDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230412205838_ChangeCascadePaths")]
+    partial class ChangeCascadePaths
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,7 +52,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments", (string)null);
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Core.Entities.CommentLike", b =>
@@ -74,7 +76,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CommentLikes", (string)null);
+                    b.ToTable("CommentLikes");
                 });
 
             modelBuilder.Entity("Core.Entities.Follow", b =>
@@ -99,7 +101,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("FollowerId");
 
-                    b.ToTable("Follows", (string)null);
+                    b.ToTable("Follows");
                 });
 
             modelBuilder.Entity("Core.Entities.GroupChat", b =>
@@ -116,7 +118,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GroupChats", (string)null);
+                    b.ToTable("GroupChats");
                 });
 
             modelBuilder.Entity("Core.Entities.GroupChatMessage", b =>
@@ -147,7 +149,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("GroupChatMessages", (string)null);
+                    b.ToTable("GroupChatMessages");
                 });
 
             modelBuilder.Entity("Core.Entities.IndividualChat", b =>
@@ -177,7 +179,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("IndividualChats", (string)null);
+                    b.ToTable("IndividualChats");
                 });
 
             modelBuilder.Entity("Core.Entities.IndividualChatMessage", b =>
@@ -208,7 +210,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("IndividualChatMessages", (string)null);
+                    b.ToTable("IndividualChatMessages");
                 });
 
             modelBuilder.Entity("Core.Entities.Notification", b =>
@@ -234,7 +236,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Notifications", (string)null);
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("Core.Entities.Post", b =>
@@ -260,7 +262,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Core.Entities.PostLike", b =>
@@ -284,7 +286,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PostLikes", (string)null);
+                    b.ToTable("PostLikes");
                 });
 
             modelBuilder.Entity("Core.Entities.User", b =>
@@ -373,7 +375,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("MembersId");
 
-                    b.ToTable("GroupChatUser", (string)null);
+                    b.ToTable("GroupChatUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

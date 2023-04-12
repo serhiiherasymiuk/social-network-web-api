@@ -77,7 +77,8 @@ namespace Core.Services
             {
                 UserName = register.Username,
                 Email = register.Email,
-                PhoneNumber = register.PhoneNumber
+                PhoneNumber = register.PhoneNumber,
+                //DateRegistrated = new DateTime(),
             };
 
             var result = await userManager.CreateAsync(user, register.Password);
