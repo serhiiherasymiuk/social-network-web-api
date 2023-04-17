@@ -17,16 +17,34 @@ namespace Core.Services
         private readonly SignInManager<User> signInManager;
         private readonly IMapper mapper;
         private readonly IJwtService jwtService;
+        private readonly IRepository<Follow> followsRepo;
 
         public UsersService(UserManager<User> userManager,
                             SignInManager<User> signInManager,
                             IMapper mapper,
-                            IJwtService jwtService)
+                            IJwtService jwtService,
+                            IRepository<Follow> followsRepo)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.mapper = mapper;
             this.jwtService = jwtService;
+            this.followsRepo = followsRepo;
+        }
+        public async Task<IEnumerable<UserDTO>> GetUserFollowersByUserId(string userId)
+        {
+            var follows = await followsRepo.GetAllBySpec(new Follows.ByFollowedUserId(userId));
+            var followerIds = follows.Select(f => f.FollowerId).Distinct();
+            var followers = await userManager.Users.Where(u => followerIds.Contains(u.Id)).ToListAsync();
+            return mapper.Map<IEnumerable<UserDTO>>(followers);
+        }
+
+        public async Task<IEnumerable<UserDTO>> GetUserFollowingByUserId(string userId)
+        {
+            var follows = await followsRepo.GetAllBySpec(new Follows.ByFollowerId(userId));
+            var followingIds = follows.Select(f => f.FollowedUserId).Distinct();
+            var followings = await userManager.Users.Where(u => followingIds.Contains(u.Id)).ToListAsync(); 
+            return mapper.Map<IEnumerable<UserDTO>>(followings);
         }
         public async Task<IEnumerable<UserDTO>> GetAll()
         {
@@ -52,7 +70,13 @@ namespace Core.Services
                 throw new HttpException(ErrorMessages.UserByIdNotFound, HttpStatusCode.NotFound);
             return mapper.Map<UserDTO>(user);
         }
-
+        public async Task<UserDTO> GetByUserName(string userName)
+        {
+            var user = await userManager.Users.Where(u => u.UserName == userName).FirstOrDefaultAsync();
+            if (user == null)
+                throw new HttpException(ErrorMessages.UserByUserNameNotFound, HttpStatusCode.NotFound);
+            return mapper.Map<UserDTO>(user);
+        }
         public async Task<LoginResponseDto> Login(LoginDTO login)
         {
             var user = await userManager.FindByNameAsync(login.Username);
@@ -78,7 +102,7 @@ namespace Core.Services
                 UserName = register.Username,
                 Email = register.Email,
                 PhoneNumber = register.PhoneNumber,
-                //DateRegistrated = new DateTime(),
+                DateRegistrated = DateTime.Now,
             };
 
             var result = await userManager.CreateAsync(user, register.Password);
@@ -108,19 +132,7 @@ namespace Core.Services
         public async Task<IEnumerable<UserDTO>> GetByGroupChatId(int id)
         {
             var users = await userManager.Users
-                .Where(x => x.GroupChats.Any(x => x.Id == id))
-                .Include(x => x.Posts)
-                .Include(x => x.Comments)
-                .Include(x => x.PostLikes)
-                .Include(x => x.CommentLikes)
-                .Include(x => x.Followers)
-                .Include(x => x.FollowedUsers)
-                .Include(x => x.GroupChatMessages)
-                .Include(x => x.IndividualChatMessages)
-                .Include(x => x.GroupChats)
-                .Include(x => x.IndividualChats)
-                .Include(x => x.Notifications)
-                .ToListAsync();
+                .Where(x => x.GroupChats.Any(x => x.Id == id)).ToListAsync();
             return mapper.Map<IEnumerable<UserDTO>>(users);
         }
 

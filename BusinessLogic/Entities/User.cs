@@ -7,7 +7,7 @@ namespace Core.Entities
         public string? ProfilePictureUrl { get; set; }
         public string? ProfileBackgroundUrl { get; set; }
         public string? DisplayUsername { get; set; }
-        //public DateTime DateRegistrated { get; set; }
+        public DateTime DateRegistrated { get; set; }
         public ICollection<Post> Posts { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<PostLike> PostLikes { get; set; }

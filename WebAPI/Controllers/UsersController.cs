@@ -27,6 +27,31 @@ namespace WebAPI.Controllers
         {
             return Ok(await usersService.GetById(id));
         }
+        [HttpGet("getByUserName/{userName}")]
+        public async Task<IActionResult> GetByUserName([FromRoute] string userName)
+        {
+            return Ok(await usersService.GetByUserName(userName));
+        }
+        [HttpGet("getUserFollowersByUserId/{userId}")]
+        public async Task<IActionResult> GetUserFollowersByUserId([FromRoute] string userId)
+        {
+            return Ok(await usersService.GetUserFollowersByUserId(userId));
+        }
+        [HttpGet("getUserFollowingByUserId/{userId}")]
+        public async Task<IActionResult> GetUserFollowingByUserId([FromRoute] string userId)
+        {
+            return Ok(await usersService.GetUserFollowingByUserId(userId));
+        }
+        [HttpGet("getLikedUsersByPostId/{id}")]
+        public async Task<IActionResult> GetLikedUsersByPostId([FromRoute] int id)
+        {
+            return Ok(await usersService.GetLikedUsersByPostId(id));
+        }
+        [HttpGet("getLikedUsersByCommentId/{id}")]
+        public async Task<IActionResult> GetLikedUsersByCommentId([FromRoute] int id)
+        {
+            return Ok(await usersService.GetLikedUsersByCommentId(id));
+        }
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO register)
         {
