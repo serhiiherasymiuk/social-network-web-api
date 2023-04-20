@@ -32,15 +32,15 @@ namespace WebAPI.Controllers
         {
             return Ok(await usersService.GetByUserName(userName));
         }
-        [HttpGet("getUserFollowersByUserId/{userId}")]
-        public async Task<IActionResult> GetUserFollowersByUserId([FromRoute] string userId)
+        [HttpGet("getFollowersByUserId/{userId}")]
+        public async Task<IActionResult> GetFollowersByUserId([FromRoute] string userId)
         {
-            return Ok(await usersService.GetUserFollowersByUserId(userId));
+            return Ok(await usersService.GetFollowersByUserId(userId));
         }
-        [HttpGet("getUserFollowingByUserId/{userId}")]
-        public async Task<IActionResult> GetUserFollowingByUserId([FromRoute] string userId)
+        [HttpGet("getFollowingByUserId/{userId}")]
+        public async Task<IActionResult> GetFollowingByUserId([FromRoute] string userId)
         {
-            return Ok(await usersService.GetUserFollowingByUserId(userId));
+            return Ok(await usersService.GetFollowingByUserId(userId));
         }
         [HttpGet("getLikedUsersByPostId/{id}")]
         public async Task<IActionResult> GetLikedUsersByPostId([FromRoute] int id)

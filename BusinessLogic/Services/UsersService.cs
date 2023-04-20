@@ -31,15 +31,15 @@ namespace Core.Services
             this.jwtService = jwtService;
             this.followsRepo = followsRepo;
         }
-        public async Task<IEnumerable<UserDTO>> GetUserFollowersByUserId(string userId)
+        public async Task<IEnumerable<UserDTO>> GetFollowersByUserId(string userId)
         {
             var follows = await followsRepo.GetAllBySpec(new Follows.ByFollowedUserId(userId));
-            var followerIds = follows.Select(f => f.FollowerId).Distinct();
-            var followers = await userManager.Users.Where(u => followerIds.Contains(u.Id)).ToListAsync();
+            var followersIds = follows.Select(f => f.FollowerId).Distinct();
+            var followers = await userManager.Users.Where(u => followersIds.Contains(u.Id)).ToListAsync();
             return mapper.Map<IEnumerable<UserDTO>>(followers);
         }
 
-        public async Task<IEnumerable<UserDTO>> GetUserFollowingByUserId(string userId)
+        public async Task<IEnumerable<UserDTO>> GetFollowingByUserId(string userId)
         {
             var follows = await followsRepo.GetAllBySpec(new Follows.ByFollowerId(userId));
             var followingIds = follows.Select(f => f.FollowedUserId).Distinct();
@@ -86,7 +86,8 @@ namespace Core.Services
 
             return new LoginResponseDto()
             {
-                Token = jwtService.CreateToken(jwtService.GetClaims(user))
+                Token = jwtService.CreateToken(jwtService.GetClaims(user)),
+                UserId = user.Id,
             };
         }
 
