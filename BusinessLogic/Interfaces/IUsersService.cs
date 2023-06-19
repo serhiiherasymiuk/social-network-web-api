@@ -6,6 +6,7 @@ namespace Core.Interfaces
     {
         Task<IEnumerable<UserDTO>> GetAll();
         Task<UserDTO> GetById(string id);
+        Task<IEnumerable<UserDTO>> GetByGroupChatId(int id);
         Task<IEnumerable<UserDTO>> GetLikedUsersByCommentId(int id);
         Task<IEnumerable<UserDTO>> GetLikedUsersByPostId(int id);
         Task<LoginResponseDto> Login(LoginDTO loginDTO);

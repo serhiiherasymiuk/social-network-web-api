@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using System.Text.Json.Serialization;
 
 namespace Core.DTOs
 {
@@ -14,8 +15,11 @@ namespace Core.DTOs
         public ICollection<CommentLikeDTO?> CommentLikes { get; set; }
         public ICollection<FollowDTO>? Followers { get; set; }
         public ICollection<FollowDTO>? FollowedUsers { get; set; }
-        public ICollection<MessageDTO>? SentMessages { get; set; }
-        public ICollection<MessageDTO>? ReceivedMessages { get; set; }
+        public ICollection<IndividualChatDTO>? IndividualChats { get; set; }
+        //[JsonIgnore]
+        public ICollection<GroupChatDTO>? GroupChats { get; set; }
+        public ICollection<IndividualChatMessageDTO>? IndividualChatMessages { get; set; }
+        public ICollection<GroupChatMessageDTO>? GroupChatMessages { get; set; }
         public ICollection<NotificationDTO>? Notifications { get; set; }
     }
 }

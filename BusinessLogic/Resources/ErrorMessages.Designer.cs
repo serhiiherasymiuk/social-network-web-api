@@ -70,7 +70,7 @@ namespace Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Comment Like requested id not found.
+        ///   Looks up a localized string similar to CommentLike with  requested id not found.
         /// </summary>
         internal static string CommentLikeByIdNotFound {
             get {
@@ -79,11 +79,47 @@ namespace Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Follow requested id not found.
+        ///   Looks up a localized string similar to Follow with  requested id not found.
         /// </summary>
         internal static string FollowByIdNotFound {
             get {
                 return ResourceManager.GetString("FollowByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GroupChat with  requested id not found.
+        /// </summary>
+        internal static string GroupChatByIdNotFound {
+            get {
+                return ResourceManager.GetString("GroupChatByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GroupChatMessage with requested id not found.
+        /// </summary>
+        internal static string GroupChatMessageByIdNotFound {
+            get {
+                return ResourceManager.GetString("GroupChatMessageByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IndividualChat with requested id not found.
+        /// </summary>
+        internal static string IndividualChatByIdNotFound {
+            get {
+                return ResourceManager.GetString("IndividualChatByIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IndividualChatMessage with requested id not found.
+        /// </summary>
+        internal static string IndividualChatMessageByIdNotFound {
+            get {
+                return ResourceManager.GetString("IndividualChatMessageByIdNotFound", resourceCulture);
             }
         }
         
@@ -97,7 +133,7 @@ namespace Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Message requested id not found.
+        ///   Looks up a localized string similar to Message with  requested id not found.
         /// </summary>
         internal static string MessageByIdNotFound {
             get {
@@ -106,7 +142,7 @@ namespace Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notification Like requested id not found.
+        ///   Looks up a localized string similar to Notification with  requested id not found.
         /// </summary>
         internal static string NotificationByIdNotFound {
             get {
@@ -124,20 +160,11 @@ namespace Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Post Like requested id not found.
+        ///   Looks up a localized string similar to PostLike with  requested id not found.
         /// </summary>
         internal static string PostLikeByIdNotFound {
             get {
                 return ResourceManager.GetString("PostLikeByIdNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        internal static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         
