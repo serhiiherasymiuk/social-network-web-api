@@ -114,6 +114,7 @@ namespace Core.Services
         {
             User user = new()
             {
+                DisplayUsername = register.DisplayUsername,
                 UserName = register.Username,
                 Email = register.Email,
                 PhoneNumber = register.PhoneNumber
