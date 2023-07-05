@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Core.DTOs;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Core.Services;
 
 namespace WebAPI.Controllers
 {
@@ -26,6 +27,31 @@ namespace WebAPI.Controllers
         {
             return Ok(await usersService.GetById(id));
         }
+        [HttpGet("getByUserName/{userName}")]
+        public async Task<IActionResult> GetByUserName([FromRoute] string userName)
+        {
+            return Ok(await usersService.GetByUserName(userName));
+        }
+        [HttpGet("getFollowersByUserId/{userId}")]
+        public async Task<IActionResult> GetFollowersByUserId([FromRoute] string userId)
+        {
+            return Ok(await usersService.GetFollowersByUserId(userId));
+        }
+        [HttpGet("getFollowingByUserId/{userId}")]
+        public async Task<IActionResult> GetFollowingByUserId([FromRoute] string userId)
+        {
+            return Ok(await usersService.GetFollowingByUserId(userId));
+        }
+        [HttpGet("getLikedUsersByPostId/{id}")]
+        public async Task<IActionResult> GetLikedUsersByPostId([FromRoute] int id)
+        {
+            return Ok(await usersService.GetLikedUsersByPostId(id));
+        }
+        [HttpGet("getLikedUsersByCommentId/{id}")]
+        public async Task<IActionResult> GetLikedUsersByCommentId([FromRoute] int id)
+        {
+            return Ok(await usersService.GetLikedUsersByCommentId(id));
+        }
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO register)
         {
@@ -42,6 +68,18 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Logout()
         {
             await usersService.Logout();
+            return Ok();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] string id)
+        {
+            await usersService.Delete(id);
+            return Ok();
+        }
+        [HttpPut]
+        public async Task<IActionResult> Edit([FromBody] UserDTO user)
+        {
+            await usersService.Edit(user);
             return Ok();
         }
     }

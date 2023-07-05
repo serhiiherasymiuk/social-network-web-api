@@ -12,12 +12,12 @@ namespace Infrastructure.Configurations
                 .HasOne(f => f.Follower)
                 .WithMany(u => u.FollowedUsers)
                 .HasForeignKey(f => f.FollowerId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Restrict);
             builder
                 .HasOne(f => f.FollowedUser)
                 .WithMany(u => u.Followers)
                 .HasForeignKey(f => f.FollowedUserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

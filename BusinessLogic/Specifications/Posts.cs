@@ -20,7 +20,7 @@ namespace Core.Specifications
             public All()
             {
                 Query
-                    .OrderBy(x => x.PostLikes.Count)
+                    .OrderByDescending(x => x.DateCreated)
                     .Include(x => x.Comments)
                     .Include(x => x.PostLikes);
             }
