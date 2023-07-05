@@ -65,7 +65,9 @@ namespace Core.Services
         }
         public async Task<UserDTO> GetById(string id)
         {
-            var user = await userManager.Users.Where(u => u.Id == id).FirstOrDefaultAsync();
+            var user = await userManager.Users.Where(u => u.Id == id)
+                .FirstOrDefaultAsync();
+                
             if (user == null)
                 throw new HttpException(ErrorMessages.UserByIdNotFound, HttpStatusCode.NotFound);
             return mapper.Map<UserDTO>(user);
@@ -100,6 +102,7 @@ namespace Core.Services
         {
             User user = new()
             {
+                DisplayUsername = register.DisplayUsername,
                 UserName = register.Username,
                 Email = register.Email,
                 PhoneNumber = register.PhoneNumber,
